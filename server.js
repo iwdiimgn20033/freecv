@@ -3,8 +3,8 @@ const path = require('path');
 const app = express();
 app.use(express.json({ limit: '2mb' }));
 
-// يخدم الموقع نفسه (public/index.html وأي ملفات أخرى بجانبه)
-app.use(express.static(path.join(__dirname, 'public')));
+// يخدم الموقع نفسه (index.html وأي ملفات أخرى بجانب server.js في نفس المجلد)
+app.use(express.static(__dirname));
 
 const API_KEY = process.env.ANTHROPIC_API_KEY;
 if (!API_KEY) {
