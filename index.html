@@ -1,1 +1,1164 @@
-Commit. Railway
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتب الصياغة — السيرة الذاتية وخطاب التقديم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+  :root{
+    --bg:#F6F7FC; --bg-2:#FFFFFF;
+    --surface:#FFFFFF; --surface-2:#FBFAFF; --surface-3:#F1F0FB;
+    --border:#E5E4F3; --border-soft:#EDEBFA;
+    --text:#242640; --muted:#6B7089; --faint:#B7B9CE;
+    --paper:#FDFCFA; --paper-muted:#6B7280; --paper-line:#E2E4EA;
+    --violet:#7C6CF6; --cyan:#2FB9C4; --amber:#F0A059; --amber-deep:#C97A34; --amber-soft:#FCEBD8;
+    --error:#D6584F;
+    --grad: linear-gradient(135deg, var(--violet), var(--cyan));
+    --serif: "Amiri", "Times New Roman", serif;
+    --sans: "IBM Plex Sans Arabic", "Tajawal", "Cairo", "Tahoma", sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family: var(--sans); color: var(--text); -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(at 8% 8%, rgba(124,108,246,0.13) 0, transparent 48%),
+      radial-gradient(at 92% 18%, rgba(47,185,196,0.13) 0, transparent 48%),
+      radial-gradient(at 25% 95%, rgba(240,160,89,0.10) 0, transparent 50%),
+      radial-gradient(at 80% 90%, rgba(124,108,246,0.08) 0, transparent 50%),
+      var(--bg);
+  }
+  button{font-family:inherit; cursor:pointer;}
+  input, textarea{
+    font-family: var(--sans); color: var(--text); background: var(--surface);
+    border: 1px solid var(--border); border-radius: 10px; padding: 9px 12px; font-size: 14px; width: 100%;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  input::placeholder, textarea::placeholder{ color: var(--faint); }
+  input:focus, textarea:focus{ outline: none; border-color: var(--violet); box-shadow: 0 0 0 3px rgba(124,108,246,0.15); }
+  textarea{ resize: vertical; line-height:1.6; }
+  label{ display:block; font-size: 12px; font-weight:600; color: var(--muted); margin-bottom: 4px; }
+  .field{ margin-bottom: 12px; }
+  .field-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .app-header{ padding: 22px 28px 18px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.6); backdrop-filter: blur(6px); position:relative; }
+  .app-header::after{ content:""; position:absolute; right:0; bottom:-1px; left:0; height:2px; background: var(--grad); opacity:.6; }
+  .app-header h1{ font-family: var(--sans); font-size: 23px; font-weight: 800; margin: 0 0 4px; background: var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; letter-spacing:-0.01em; }
+  .app-header p{ margin:0; font-size: 13.5px; color: var(--muted); max-width: 680px; line-height:1.6; }
+  .auth-row{ display:flex; align-items:center; gap:10px; margin-top:12px; flex-wrap:wrap; }
+  .auth-row input{ width:220px; }
+  .auth-status{ font-size:12px; color:var(--muted); }
+
+  .layout{ display:grid; grid-template-columns: 440px 1fr; align-items: start; min-height: calc(100vh - 92px); }
+  .desk{ padding: 24px 24px 60px; max-height: calc(100vh - 92px); overflow-y: auto; border-left: 1px solid var(--border); }
+
+  .quickstart{ position:relative; border-radius: 18px; padding: 18px; margin-bottom: 24px; background: linear-gradient(160deg, rgba(124,108,246,0.10), rgba(47,185,196,0.06)); border: 1px solid rgba(124,108,246,0.28); box-shadow: 0 10px 26px rgba(124,108,246,0.14); }
+  .quickstart .tag{ font-size: 11px; font-weight: 800; letter-spacing:.06em; color: var(--cyan); margin-bottom: 6px; text-transform:uppercase; }
+  .quickstart h2{ font-family: var(--sans); font-size: 17.5px; font-weight:800; margin: 0 0 6px; color: var(--text); }
+  .quickstart p{ font-size: 12.5px; color: var(--muted); margin: 0 0 10px; line-height:1.6; }
+  .quickstart textarea{ min-height: 100px; margin-bottom: 10px; background: rgba(255,255,255,0.75); border-color: rgba(124,108,246,0.25); }
+
+  .section{ margin-bottom: 12px; background:linear-gradient(160deg, #FFFFFF, var(--surface-2)); border:1px solid var(--border); border-radius:14px; padding:16px 18px; box-shadow: 0 1px 2px rgba(36,38,64,0.04); transition: box-shadow .15s ease, border-color .15s ease; }
+  .section:hover{ box-shadow: 0 6px 18px rgba(36,38,64,0.07); border-color: var(--border-soft); }
+  .section-head{ display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; }
+  .section-head h3{ font-family: var(--sans); font-size: 15.5px; font-weight:700; margin:0; color: var(--text); }
+  .section-head .chevron{ display:inline-block; color:var(--violet); font-size:13px; transition: transform .2s ease; margin-inline-start:8px; }
+  .section.collapsed .section-head .chevron{ transform: rotate(-90deg); }
+  .section-body{ margin-top:14px; }
+  .section.collapsed .section-body{ display:none; }
+  .section-note{ font-size: 12px; color: var(--muted); margin: -4px 0 12px; line-height:1.6; }
+
+  .entry{ background:var(--surface-3); border:1px solid var(--border); border-radius:12px; padding: 12px 14px; margin-bottom: 12px; transition: border-color .15s ease, box-shadow .15s ease; }
+  .entry:hover{ border-color: rgba(124,108,246,0.35); box-shadow: 0 3px 10px rgba(124,108,246,0.08); }
+  .entry-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;}
+  .entry-top .entry-index{ font-size: 11.5px; color: var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
+
+  .btn{ font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); transition: border-color .15s ease, transform .12s ease, box-shadow .15s ease; }
+  .btn:hover{ border-color: var(--violet); }
+  .btn.ai{ color:#fff; border:none; background: linear-gradient(135deg, var(--amber), var(--amber-deep)); }
+  .btn.ai:hover{ transform: translateY(-1px); box-shadow:0 4px 14px rgba(240,160,89,0.4); }
+  .btn.ai:disabled{ opacity:0.5; cursor:default; transform:none; box-shadow:none; }
+  .btn.subtle{ background:none; border:none; color: var(--muted); font-weight: 500; padding: 4px 6px; }
+  .btn.subtle:hover{ color: var(--error); border:none; }
+  .btn.add{ width:100%; text-align:center; border: 1.5px dashed var(--border); background:none; color: var(--muted); border-radius:10px; }
+  .btn.add:hover{ border-color: var(--violet); color: var(--violet); }
+
+  .row-actions{ display:flex; gap:8px; margin-top:8px; align-items:center; }
+  .ai-status{ font-size: 11.5px; color: var(--muted); font-style: italic; }
+  .ai-status.err{ color: var(--error); font-style: normal; font-weight:600; }
+
+  .preview-wrap{ padding: 32px 40px 60px; display:flex; flex-direction:column; align-items:center; max-height: calc(100vh - 92px); overflow-y: auto; }
+
+  .lang-row{ width:100%; max-width:660px; display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .lang-label{ font-size:12px; color:var(--muted); font-weight:600; }
+  .lang-switch{ display:flex; gap:4px; flex-wrap:wrap; }
+  .lang-btn{ font-size:12px; font-weight:700; padding:5px 12px; border-radius:8px; border:1px solid var(--border); background:var(--surface); color:var(--muted); transition: all .15s ease; }
+  .lang-btn.active{ background: var(--grad); border-color:transparent; color:#fff; }
+  .lang-btn:hover:not(.active):not(:disabled){ border-color:var(--violet); color:var(--text); }
+  .lang-btn:disabled{ opacity:0.5; }
+  .tmpl-dot{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-inline-end:5px; vertical-align:middle; }
+
+  .pages[data-template="slate"]{ --ink:#2D3142; --brass:#3E7C7A; --brass-deep:#2E5B59; --brass-soft:#DCEEED; }
+  .pages[data-template="warm"]{ --ink:#33261D; --brass:#C1652F; --brass-deep:#9C4A1F; --brass-soft:#F5DFCF; }
+  .pages[data-template="mono"]{ --ink:#222222; --brass:#5B5B5B; --brass-deep:#3F3F3F; --brass-soft:#E7E7E7; }
+
+  .toolbar{ width: 100%; max-width: 660px; display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px; gap:12px; flex-wrap:wrap; }
+  .tabs{ display:flex; gap:6px; transition:opacity .15s ease; }
+  .tab-btn{ font-size: 13px; font-weight:600; padding:7px 15px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); transition: all .15s ease; }
+  .tab-btn.active{ background: var(--grad); border-color: transparent; color: #fff; }
+  .toolbar-right{ display:flex; align-items:center; gap:14px; }
+  .combine-check{ font-size: 12px; color: var(--muted); display:flex; align-items:center; gap:6px; white-space:nowrap; }
+  .combine-check input{ width:auto; }
+  .btn.download{ background: var(--grad); color: #fff; border: none; padding: 9px 18px; white-space:nowrap; border-radius:10px; font-weight:700; }
+  .btn.download:hover{ transform: translateY(-1px); box-shadow:0 6px 18px rgba(124,108,246,0.35); }
+
+  .pages{ display:flex; flex-direction:column; gap: 28px; width: 100%; max-width: 660px; --ink:#1B2A4A; --brass:#A9793B; --brass-deep:#8A5F2C; --brass-soft:#F1E6D3; }
+  .sheet{
+    width:100%; aspect-ratio: 8.5 / 11; background: var(--paper);
+    box-shadow: 0 1px 2px rgba(36,38,64,0.06), 0 18px 40px rgba(36,38,64,0.14);
+    padding: 56px 58px; font-family: var(--serif); color:#24272B; position:relative;
+  }
+  .cont-header{ display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--paper-line); padding-bottom:8px; margin-bottom:16px; font-family: "Cairo", var(--sans); }
+  .cont-header .cname{ font-weight:700; font-size:13px; color: var(--ink); }
+  .cont-header .cpage{ font-size:11.5px; color: var(--paper-muted); }
+  .section-continued{ font-family: "Cairo", var(--sans); font-size:11.5px; color: var(--paper-muted); font-style: italic; margin-bottom:12px; }
+  .page-footer{ position:absolute; bottom:20px; left:58px; font-family: "Cairo", var(--sans); font-size:10.5px; color: #C7CAD4; }
+  .sheet[dir="ltr"] .page-footer{ left:auto; right:58px; }
+
+  .cv-name{ font-size: 30px; font-weight: 700; color: var(--ink); margin: 0 0 2px; line-height:1.3; }
+  .cv-title{ font-family: "Cairo", var(--sans); font-size: 14px; font-weight:700; color: var(--brass-deep); margin: 0 0 8px; }
+  .cv-contact{ font-family: "Cairo", var(--sans); font-size: 12.5px; color: var(--paper-muted); line-height:1.7; }
+  .cv-contact .sep{ margin: 0 8px; color: var(--paper-line); }
+  .cv-meta2{ font-family: "Cairo", var(--sans); font-size: 12px; color: var(--paper-muted); line-height:1.7; }
+
+  .cv-section-title{ font-family: "Cairo", var(--sans); font-size: 12.5px; font-weight: 700; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 5px; }
+  .cv-summary{ font-size: 15px; line-height:1.85; margin:0; }
+
+  .cv-item-head{ display:flex; justify-content:space-between; align-items:baseline; gap: 12px; }
+  .cv-item-role{ font-size: 15.5px; font-weight:700; color: #24272B; }
+  .cv-item-meta{ font-family: "Cairo", var(--sans); font-size: 12px; color: var(--paper-muted); white-space:nowrap; }
+  .cv-item-sub{ font-family: "Cairo", var(--sans); font-size: 12.5px; color: var(--paper-muted); margin: 1px 0 6px; }
+  .cv-bullets{ margin: 4px 0 0; padding-right: 20px; padding-left:0; }
+  .sheet[dir="ltr"] .cv-bullets{ padding-left:20px; padding-right:0; }
+  .cv-bullets li{ font-size: 14px; line-height:1.7; margin-bottom: 3px; }
+
+  .cv-skills{ display:flex; flex-wrap:wrap; gap: 7px; }
+  .cv-skill{ font-family: "Cairo", var(--sans); font-size: 12px; font-weight:600; border: 1px solid var(--paper-line); color: var(--ink); padding: 3px 11px; border-radius: 3px; }
+  .cv-empty{ font-family: "Cairo", var(--sans); font-size: 13px; color: var(--paper-line); font-style: italic; }
+
+  .cl-date{ font-family: "Cairo", var(--sans); font-size: 12.5px; color: var(--paper-muted); margin-bottom:10px; }
+  .cl-recipient{ font-family: "Cairo", var(--sans); font-size: 13.5px; color: #24272B; line-height:1.6; }
+  .cl-greeting{ font-size: 16px; margin:0; }
+  .cl-para{ font-size: 15px; line-height:1.9; margin:0; }
+  .cl-close{ font-size: 15px; line-height:1.9; margin:0; }
+
+  @media (max-width: 880px){
+    .layout{ grid-template-columns: 1fr; }
+    .desk{ max-height:none; border-left:none; border-bottom: 1px solid var(--border); }
+    .preview-wrap{ max-height:none; }
+  }
+
+  @media print{
+    .app-header, .desk, .toolbar, .lang-row{ display:none !important; }
+    body, .preview-wrap{ background: white; padding:0; margin:0; max-height:none; overflow:visible; }
+    .layout{ grid-template-columns: 1fr; min-height:0; }
+    .pages{ max-width:none; gap:0; }
+    .sheet{ width: 8.5in; height: 11in; aspect-ratio: auto; padding: 0.75in 0.85in; box-shadow:none; page-break-before: always; }
+    .sheet.first-sheet{ page-break-before: auto; }
+    @page{ size: letter; margin:0; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="app-header">
+    <h1>مكتب الصياغة</h1>
+    <p>عبّئ المعلومات في النموذج الاسترشادي على اليمين، أو ألصق ملاحظات سريعة في مربع البداية السريعة ليقوم الذكاء الاصطناعي بصياغة أول نسخة. يمكنك أيضاً عرض السيرة الذاتية وخطاب التقديم بالإنجليزية أو الإسبانية أو الفرنسية من أعلى المعاينة.</p>
+    <div class="auth-row" id="authRow">
+      <span class="auth-status" id="authStatus">جارٍ التحقق من تسجيل الدخول…</span>
+      <div id="authLoggedOut" style="display:none; gap:10px; align-items:center; flex-wrap:wrap;">
+        <input id="authEmail" type="email" placeholder="بريدك الإلكتروني لحفظ بياناتك">
+        <button class="btn ai" id="authSendLink">إرسال رمز التفعيل</button>
+        <input id="authCode" type="text" inputmode="numeric" placeholder="رمز التفعيل" style="display:none; width:120px;">
+        <button class="btn ai" id="authVerifyCode" style="display:none;">تأكيد الرمز</button>
+      </div>
+      <div id="authLoggedIn" style="display:none; gap:10px; align-items:center;">
+        <span id="authEmailLabel" style="font-size:13px; color:var(--text); font-weight:600;"></span>
+        <button class="btn subtle" id="authLogout">تسجيل الخروج</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="desk" id="desk">
+
+      <div class="quickstart">
+        <div class="tag">بداية سريعة</div>
+        <h2>صياغة كل شيء دفعة واحدة</h2>
+        <p>ألصق خبرتك بشكل حر، أو سيرة ذاتية قديمة، أو حتى إعلان الوظيفة التي تتقدم لها. سيقوم المكتب بصياغة أول نسخة كاملة أدناه، وتستطيع تنقيحها بعد ذلك.</p>
+        <textarea id="quickstartInput" placeholder="مثال: اسمي سارة، عملت أخصائية تسويق في شركة اتصالات من 2018 إلى 2021 في الرياض، ثم محللة بيانات في شركة تجزئة بدبي من 2021 إلى 2024، أتقدم الآن لوظيفة مدير تسويق في شركة..."></textarea>
+        <div class="row-actions">
+          <button class="btn ai" id="quickstartBtn">ابدأ الصياغة</button>
+          <span class="ai-status" id="quickstartStatus"></span>
+        </div>
+      </div>
+
+      <div class="section" data-section="personal">
+        <div class="section-head"><h3>١. المعلومات الشخصية</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+        <div class="field"><label for="f-name">الاسم الكامل</label><input id="f-name" placeholder="سارة أحمد"></div>
+        <div class="field-row">
+          <div class="field"><label for="f-birthdate">تاريخ الميلاد</label><input id="f-birthdate" placeholder="29/11/1984"></div>
+          <div class="field"><label for="f-nationality">الجنسية (اختياري)</label><input id="f-nationality" placeholder="..."></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="f-phone">رقم الهاتف</label><input id="f-phone" placeholder="+971 5x xxx xxxx"></div>
+          <div class="field"><label for="f-email">البريد الإلكتروني</label><input id="f-email" placeholder="name@email.com"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="f-location">مكان الإقامة</label><input id="f-location" placeholder="دبي، الإمارات"></div>
+          <div class="field"><label for="f-linkedin">لينكدإن (اختياري)</label><input id="f-linkedin" placeholder="linkedin.com/in/..."></div>
+        </div>
+        <div class="field"><label for="f-website">موقع شخصي (اختياري)</label><input id="f-website" placeholder="..."></div>
+        </div>
+      </div>
+
+      <div class="section collapsed" data-section="jobtitle">
+        <div class="section-head"><h3>٢. المسمى الوظيفي المطلوب</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+        <div class="field"><label for="f-title">المسمى الذي تريد الظهور به</label><input id="f-title" placeholder="أخصائية تسويق رقمي"></div>
+        </div>
+      </div>
+
+      <div class="section collapsed" data-section="summary">
+        <div class="section-head"><h3>نبذة مهنية (اختياري)</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+        <div class="field"><label for="f-summary">سطر أو سطرين، أو اتركها فارغة</label>
+          <textarea id="f-summary" style="min-height:75px" placeholder="من أنت، وما الذي تحسنه، وما الذي تبحث عنه الآن."></textarea>
+        </div>
+        <div class="row-actions">
+          <button class="btn ai" id="summaryAiBtn">صياغة بالذكاء الاصطناعي</button>
+          <span class="ai-status" id="summaryStatus"></span>
+        </div>
+        </div>
+      </div>
+
+      <div class="section collapsed" data-section="experience">
+        <div class="section-head"><h3>٣. الخبرات العملية</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+        <div class="section-note">كرّر لكل وظيفة سابقة. يكفي كتابة أهم المهام كـ كلمات مفتاحية — الذكاء الاصطناعي يحوّلها إلى نقاط مهنية كاملة.</div>
+        <div id="experienceList"></div>
+        <button class="btn add" id="addExperience">+ إضافة وظيفة</button>
+        </div>
+      </div>
+
+      <div class="section collapsed" data-section="education">
+        <div class="section-head"><h3>٤. التعليم</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+        <div id="educationList"></div>
+        <button class="btn add" id="addEducation">+ إضافة شهادة</button>
+        </div>
+      </div>
+
+      <div class="section collapsed" data-section="skills">
+        <div class="section-head"><h3>٥. المهارات</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+        <div class="field"><label for="f-skills">مفصولة بفواصل</label><input id="f-skills" placeholder="إدارة مالية، إعداد الموازنات، التدقيق الداخلي"></div>
+        </div>
+      </div>
+
+      <div class="section collapsed" data-section="languages">
+        <div class="section-head"><h3>٦. اللغات (اختياري)</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+        <div class="field"><label for="f-languages">مفصولة بفواصل</label><input id="f-languages" placeholder="العربية (اللغة الأم)، الإنجليزية (متقدم)"></div>
+        </div>
+      </div>
+
+      <div class="section collapsed" data-section="hobbies">
+        <div class="section-head"><h3>٧. الهوايات والاهتمامات (اختياري)</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+        <div class="field"><label for="f-hobbies">مفصولة بفواصل</label><input id="f-hobbies" placeholder="القراءة، السباحة، الشطرنج"></div>
+        </div>
+      </div>
+
+      <div class="section collapsed" data-section="additional">
+        <div class="section-head"><h3>٨. معلومات إضافية (اختياري)</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+        <div class="field"><label for="f-additional">شهادات مهنية، عضويات، إنجازات...</label>
+          <textarea id="f-additional" style="min-height:70px" placeholder="أي شيء آخر تراه مهماً."></textarea>
+        </div>
+        <div class="row-actions">
+          <button class="btn ai" id="additionalAiBtn">صياغة بالذكاء الاصطناعي</button>
+          <span class="ai-status" id="additionalStatus"></span>
+        </div>
+        </div>
+      </div>
+
+      <div class="section collapsed" data-section="letter">
+        <div class="section-head"><h3>خطاب التقديم</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+        <div class="field-row">
+          <div class="field"><label for="f-letter-company">الشركة</label><input id="f-letter-company" placeholder="اسم الشركة"></div>
+          <div class="field"><label for="f-letter-role">الوظيفة المتقدَّم لها</label><input id="f-letter-role" placeholder="مديرة تسويق"></div>
+        </div>
+        <div class="field"><label for="f-letter-recipient">اسم المسؤول عن التوظيف (اختياري)</label><input id="f-letter-recipient" placeholder="اتركه فارغاً لكتابة «فريق التوظيف»"></div>
+        <div class="field"><label for="f-letter-notes">ملاحظات: نص الوظيفة أو سبب رغبتك بها</label><textarea id="f-letter-notes" style="min-height:70px" placeholder="ألصق نص الإعلان الوظيفي، أو اكتب سبب اهتمامك."></textarea></div>
+        <div class="row-actions">
+          <button class="btn ai" id="letterAiBtn">صياغة بالذكاء الاصطناعي</button>
+          <span class="ai-status" id="letterStatus"></span>
+        </div>
+        <div class="field" style="margin-top:10px;"><label for="f-letter-body">نص الخطاب (قابل للتحرير، اترك سطراً فارغاً بين الفقرات)</label>
+          <textarea id="f-letter-body" style="min-height:170px" placeholder="اكتب نص الخطاب هنا أو دع الذكاء الاصطناعي يبدأه."></textarea>
+        </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="preview-wrap">
+      <div class="lang-row">
+        <span class="lang-label">قالب التصميم:</span>
+        <div class="lang-switch" id="tmplSwitch">
+          <button class="lang-btn active" data-tmpl="classic"><span class="tmpl-dot" style="background:#A9793B"></span>كلاسيكي</button>
+          <button class="lang-btn" data-tmpl="slate"><span class="tmpl-dot" style="background:#3E7C7A"></span>عصري</button>
+          <button class="lang-btn" data-tmpl="warm"><span class="tmpl-dot" style="background:#C1652F"></span>دافئ</button>
+          <button class="lang-btn" data-tmpl="mono"><span class="tmpl-dot" style="background:#6B6B6B"></span>أحادي</button>
+        </div>
+      </div>
+      <div class="lang-row">
+        <span class="lang-label">لغة المستند:</span>
+        <div class="lang-switch" id="langSwitch">
+          <button class="lang-btn active" data-lang="ar">AR</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="es">ES</button>
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="it">IT</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="zh">ZH</button>
+        </div>
+        <span class="ai-status" id="langStatus"></span>
+      </div>
+      <div class="toolbar">
+        <div class="tabs" id="tabsWrap">
+          <button class="tab-btn active" data-tab="resume" id="tabResume">السيرة الذاتية</button>
+          <button class="tab-btn" data-tab="letter" id="tabLetter">خطاب التقديم</button>
+        </div>
+        <div class="toolbar-right">
+          <label class="combine-check"><input type="checkbox" id="combineCheck"> دمج الملفين في PDF واحد</label>
+          <button class="btn download" id="downloadBtn">تحميل PDF للسيرة الذاتية</button>
+        </div>
+      </div>
+      <div class="pages" id="pagesLetter"></div>
+      <div class="pages" id="pagesResume"></div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  const state = {
+    name:"", birthdate:"", nationality:"", email:"", phone:"", location:"", linkedin:"", website:"",
+    title:"", summary:"",
+    experience: [], education: [], skills: [], languages: [], hobbies: [], additionalInfo:"",
+    letter: { company:"", role:"", recipient:"", notes:"", body:"" },
+    translations: {}
+  };
+
+  function uid(){ return 'id' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+  function newExperience(){ return { id: uid(), company:"", role:"", location:"", start:"", end:"", bulletsText:"" }; }
+  function newEducation(){ return { id: uid(), school:"", degree:"", location:"", start:"", end:"", detail:"" }; }
+  state.experience.push(newExperience());
+  state.education.push(newEducation());
+
+  function escapeHtml(s){
+    return (s || "").replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function escAttr(s){ return escapeHtml(s).replace(/\n/g, '&#10;'); }
+  function bulletsFromText(text){ return (text || "").split("\n").map(function(l){ return l.trim(); }).filter(Boolean); }
+  function joinDates(start, end){
+    if (!start && !end) return "";
+    if (start && end) return start + " – " + end;
+    return start || end;
+  }
+  function setStatus(el, msg, isErr){ el.textContent = msg || ""; el.classList.toggle("err", !!isErr); }
+
+  async function callClaude(userPrompt, opts){
+    opts = opts || {};
+    const body = { model: "claude-sonnet-5", max_tokens: opts.maxTokens || 1000, messages: [{ role: "user", content: userPrompt }] };
+    if (opts.system) body.system = opts.system;
+    const res = await fetch("/api/claude", {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error("تعذّر الوصول إلى الذكاء الاصطناعي (رمز " + res.status + ")");
+    const data = await res.json();
+    return (data.content || []).filter(function(b){ return b.type === "text"; }).map(function(b){ return b.text; }).join("\n").trim();
+  }
+  function parseJSONLoose(text){
+    return JSON.parse(text.replace(/```json/gi, "").replace(/```/g, "").trim());
+  }
+
+  const ARABIC_STYLE = 'اكتب بالعربية الفصحى المهنية المستخدمة في السير الذاتية العربية والخليجية، بأسلوب واثق ومباشر دون مبالغة.';
+
+  // ============ i18n ============
+  const STRINGS = {
+    ar: { summary:'نبذة مهنية', experience:'الخبرات العملية', education:'التعليم', skills:'المهارات', languages:'اللغات', hobbies:'الهوايات والاهتمامات', additional:'معلومات إضافية', yourName:'اسمك الكامل', addContact:'أضف بيانات التواصل من القائمة على اليمين', dobPrefix:'تاريخ الميلاد: ', natPrefix:'الجنسية: ', hiringTeam:'فريق التوظيف', sincerely:'مع خالص التقدير،', letterEmptyBody:'صِغ نص الخطاب من القائمة على اليمين، أو اكتبه بنفسك.', resumeDocLabel:'السيرة الذاتية', letterDocLabel:'خطاب التقديم', continuedWord:'، تابع', roleFallback:'المسمى الوظيفي', degreeFallback:'الشهادة', pageOf:function(n,t){ return 'صفحة ' + n + ' من ' + t; } },
+    en: { summary:'Summary', experience:'Experience', education:'Education', skills:'Skills', languages:'Languages', hobbies:'Hobbies & Interests', additional:'Additional Information', yourName:'Your name', addContact:'Add your contact details on the right', dobPrefix:'Date of birth: ', natPrefix:'Nationality: ', hiringTeam:'Hiring Team', sincerely:'Sincerely,', letterEmptyBody:'Draft the letter body on the right, or write it yourself.', resumeDocLabel:'Resume', letterDocLabel:'Cover Letter', continuedWord:', continued', roleFallback:'Role', degreeFallback:'Degree', pageOf:function(n,t){ return 'page ' + n + ' of ' + t; } },
+    es: { summary:'Resumen', experience:'Experiencia', education:'Formación', skills:'Habilidades', languages:'Idiomas', hobbies:'Aficiones e intereses', additional:'Información adicional', yourName:'Tu nombre', addContact:'Añade tus datos de contacto a la derecha', dobPrefix:'Fecha de nacimiento: ', natPrefix:'Nacionalidad: ', hiringTeam:'Equipo de contratación', sincerely:'Atentamente,', letterEmptyBody:'Redacta el cuerpo de la carta a la derecha, o escríbelo tú mismo.', resumeDocLabel:'Currículum', letterDocLabel:'Carta de presentación', continuedWord:', continuación', roleFallback:'Puesto', degreeFallback:'Título', pageOf:function(n,t){ return 'página ' + n + ' de ' + t; } },
+    fr: { summary:'Résumé', experience:'Expérience', education:'Formation', skills:'Compétences', languages:'Langues', hobbies:"Loisirs et centres d'intérêt", additional:'Informations complémentaires', yourName:'Votre nom', addContact:'Ajoutez vos coordonnées à droite', dobPrefix:'Date de naissance : ', natPrefix:'Nationalité : ', hiringTeam:'Équipe de recrutement', sincerely:'Cordialement,', letterEmptyBody:"Rédigez le corps de la lettre à droite, ou écrivez-le vous-même.", resumeDocLabel:'CV', letterDocLabel:'Lettre de motivation', continuedWord:', suite', roleFallback:'Poste', degreeFallback:'Diplôme', pageOf:function(n,t){ return 'page ' + n + ' sur ' + t; } },
+    it: { summary:'Riepilogo', experience:'Esperienza', education:'Istruzione', skills:'Competenze', languages:'Lingue', hobbies:'Interessi e hobby', additional:'Informazioni aggiuntive', yourName:'Il tuo nome', addContact:'Aggiungi i tuoi contatti a destra', dobPrefix:'Data di nascita: ', natPrefix:'Nazionalità: ', hiringTeam:'Team di selezione', sincerely:'Cordiali saluti,', letterEmptyBody:'Scrivi il corpo della lettera a destra, oppure scrivilo tu stesso.', resumeDocLabel:'Curriculum', letterDocLabel:'Lettera di presentazione', continuedWord:', continua', roleFallback:'Ruolo', degreeFallback:'Laurea', pageOf:function(n,t){ return 'pagina ' + n + ' di ' + t; } },
+    ru: { summary:'Резюме', experience:'Опыт работы', education:'Образование', skills:'Навыки', languages:'Языки', hobbies:'Хобби и интересы', additional:'Дополнительная информация', yourName:'Ваше имя', addContact:'Добавьте контактные данные справа', dobPrefix:'Дата рождения: ', natPrefix:'Национальность: ', hiringTeam:'Отдел кадров', sincerely:'С уважением,', letterEmptyBody:'Напишите текст письма справа или составьте его сами.', resumeDocLabel:'Резюме', letterDocLabel:'Сопроводительное письмо', continuedWord:', продолжение', roleFallback:'Должность', degreeFallback:'Степень', pageOf:function(n,t){ return 'страница ' + n + ' из ' + t; } },
+    zh: { summary:'个人简介', experience:'工作经历', education:'教育背景', skills:'技能', languages:'语言', hobbies:'兴趣爱好', additional:'补充信息', yourName:'您的姓名', addContact:'请在右侧添加联系方式', dobPrefix:'出生日期：', natPrefix:'国籍：', hiringTeam:'招聘团队', sincerely:'祝好，', letterEmptyBody:'请在右侧撰写信函正文，或自行填写。', resumeDocLabel:'简历', letterDocLabel:'求职信', continuedWord:'（续）', roleFallback:'职位', degreeFallback:'学位', pageOf:function(n,t){ return '第' + n + '页，共' + t + '页'; } }
+  };
+  const LOCALE_MAP = { ar:'ar', en:'en-US', es:'es-ES', fr:'fr-FR', it:'it-IT', ru:'ru-RU', zh:'zh-CN' };
+  const LANG_NAMES_AR = { en:'الإنجليزية', es:'الإسبانية', fr:'الفرنسية', it:'الإيطالية', ru:'الروسية', zh:'الصينية' };
+
+  function dirOf(lang){ return lang === 'ar' ? 'rtl' : 'ltr'; }
+
+  function buildGreeting(lang, recipient){
+    if (lang === 'fr') return recipient ? ('Cher/Chère ' + recipient + ',') : 'Madame, Monsieur,';
+    if (lang === 'es') return (recipient ? ('Estimado/a ' + recipient) : 'Estimado equipo de contratación') + ',';
+    if (lang === 'it') return (recipient ? ('Caro/a ' + recipient) : 'Gentile Ufficio Risorse Umane') + ',';
+    if (lang === 'ru') return (recipient ? ('Уважаемый(ая) ' + recipient) : 'Уважаемая команда по подбору персонала') + ',';
+    if (lang === 'zh') return (recipient ? (recipient + '，您好：') : '招聘团队，您好：');
+    if (lang === 'ar') return 'السيد/ة ' + (recipient || 'الفاضل/ة') + '،';
+    return 'Dear ' + (recipient || 'Hiring Team') + ',';
+  }
+
+  let previewLang = 'ar';
+
+  function setActiveLangBtn(lang){
+    document.querySelectorAll('.lang-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
+  }
+
+  function markDirty(){
+    state.translations = {};
+    if (previewLang !== 'ar'){ previewLang = 'ar'; setActiveLangBtn('ar'); }
+    queueCloudSave();
+  }
+
+  async function translateAll(lang){
+    const payload = {
+      name: state.name, nationality: state.nationality, title: state.title, location: state.location,
+      summary: state.summary,
+      experience: state.experience.map(function(e){ return { company:e.company, role:e.role, location:e.location, start:e.start, end:e.end, bullets: bulletsFromText(e.bulletsText) }; }),
+      education: state.education.map(function(e){ return { school:e.school, degree:e.degree, location:e.location, start:e.start, end:e.end, detail:e.detail }; }),
+      skills: state.skills, languages: state.languages, hobbies: state.hobbies, additionalInfo: state.additionalInfo,
+      letter: { company: state.letter.company, role: state.letter.role, recipient: state.letter.recipient, body: state.letter.body }
+    };
+    const raw = await callClaude(
+      'ترجم محتوى السيرة الذاتية التالي (بصيغة JSON) إلى اللغة ' + LANG_NAMES_AR[lang] + '، مع الحفاظ التام على نفس بنية JSON ونفس المفاتيح:\n' + JSON.stringify(payload) +
+      '\n\nقواعد الترجمة: ترجم كل النصوص الوصفية (title, summary, role, bullets, degree, detail, skills, languages, hobbies, additionalInfo, letter.role, letter.body) إلى اللغة المطلوبة بأسلوب مهني ومختصر. اسم الشخص (name): إن كانت اللغة الهدف غير عربية، اكتبه بحروف لاتينية بطريقة شائعة لنقل النطق، وإلا اتركه كما هو. أسماء الشركات (company) والجامعات/المدارس (school): إن كانت أسماء معروفة استخدم اسمها الرسمي المعتاد بهذه اللغة، وإلا فقط اكتبها بحروف لاتينية مقاربة للنطق دون اختراع اسم آخر. التواريخ الرقمية (start, end) اتركها كما هي، وترجم فقط كلمات مثل «حتى الآن» إلى ما يقابلها. لا تضف ولا تحذف أي معلومة، ولا تخترع أي حقيقة غير موجودة في النص الأصلي. أرجع فقط كائن JSON بنفس البنية تماماً، دون أي نص إضافي أو علامات markdown.',
+      { system: 'أنت مترجم محترف متخصص في السير الذاتية. ترجع فقط JSON صالحاً مطابقاً للبنية المطلوبة، دون أي تعليق أو معلومات مُضافة.', maxTokens: 4096 }
+    );
+    const t = parseJSONLoose(raw);
+    const content = {
+      name: t.name || state.name, birthdate: state.birthdate, nationality: t.nationality || state.nationality,
+      email: state.email, phone: state.phone, location: t.location || state.location,
+      linkedin: state.linkedin, website: state.website, title: t.title || state.title, summary: t.summary || '',
+      experience: (t.experience || []).map(function(e){ return { company: e.company||'', role: e.role||'', location: e.location||'', start: e.start||'', end: e.end||'', bulletsText: Array.isArray(e.bullets) ? e.bullets.join('\n') : '' }; }),
+      education: (t.education || []).map(function(e){ return { school:e.school||'', degree:e.degree||'', location:e.location||'', start:e.start||'', end:e.end||'', detail:e.detail||'' }; }),
+      skills: t.skills || [], languages: t.languages || [], hobbies: t.hobbies || [], additionalInfo: t.additionalInfo || '',
+      letter: { company: (t.letter && t.letter.company) || state.letter.company, role: (t.letter && t.letter.role) || state.letter.role, recipient: (t.letter && t.letter.recipient) || state.letter.recipient, body: (t.letter && t.letter.body) || '' }
+    };
+    state.translations[lang] = content;
+    return content;
+  }
+
+  // ============ Pagination engine ============
+  const METRICS = { w: 660, h: 900, contReserve: 64 };
+  let probe, scratch;
+
+  function ensureProbes(){
+    if (!probe){
+      const wrap = document.createElement('div');
+      wrap.className = 'pages';
+      wrap.style.position = 'absolute'; wrap.style.visibility = 'hidden'; wrap.style.left = '-9999px'; wrap.style.top = '0';
+      probe = document.createElement('div'); probe.className = 'sheet';
+      wrap.appendChild(probe);
+      document.body.appendChild(wrap);
+    }
+    if (!scratch){
+      scratch = document.createElement('div');
+      scratch.style.position = 'absolute'; scratch.style.visibility = 'hidden'; scratch.style.left = '-9999px'; scratch.style.top = '0';
+      scratch.style.fontFamily = 'var(--serif)'; scratch.style.color = 'var(--text)';
+      document.body.appendChild(scratch);
+    }
+  }
+
+  function measureSheetMetrics(){
+    ensureProbes();
+    const rect = probe.getBoundingClientRect();
+    const cs = getComputedStyle(probe);
+    const padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+    const padY = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+    if (rect.width > 0){ METRICS.w = rect.width - padX; METRICS.h = rect.height - padY; }
+  }
+
+  function measureUnit(html, dir){
+    scratch.style.width = METRICS.w + 'px';
+    scratch.dir = dir || 'rtl';
+    scratch.innerHTML = html;
+    const el = scratch.firstElementChild;
+    return el ? el.getBoundingClientRect().height : 0;
+  }
+
+  function titleUnit(label){
+    return { html: '<div class="unit" style="padding:20px 0 8px 0;"><div class="cv-section-title">' + escapeHtml(label) + '</div></div>', isTitle: true, sectionLabel: label, keepWithNext: true };
+  }
+
+  function paginate(rawUnits, dir){
+    measureSheetMetrics();
+    const units = rawUnits.map(function(u){ return Object.assign({}, u, { height: measureUnit(u.html, dir) }); });
+    const pages = [];
+    let current = [], currentH = 0, pageIndex = 0;
+    function budget(){ return (pageIndex === 0 ? METRICS.h : (METRICS.h - METRICS.contReserve)) - 6; }
+    for (let i = 0; i < units.length; i++){
+      const u = units[i];
+      let extra = 0;
+      if (u.keepWithNext && i + 1 < units.length) extra = units[i+1].height;
+      const need = u.height + extra;
+      if (current.length > 0 && currentH + need > budget()){
+        pages.push(current); current = []; currentH = 0; pageIndex++;
+      }
+      current.push(u); currentH += u.height;
+    }
+    if (current.length || !pages.length) pages.push(current);
+    return pages;
+  }
+
+  function renderPagesInto(containerId, pages, opts){
+    const container = document.getElementById(containerId);
+    const total = pages.length;
+    let html = '';
+    pages.forEach(function(pageUnits, idx){
+      let inner = '';
+      if (idx > 0){
+        inner += '<div class="cont-header"><span class="cname">' + escapeHtml(opts.personName || '') + '</span><span class="cpage">' + escapeHtml(opts.docLabel) + ' — ' + opts.labels.pageOf(idx+1, total) + '</span></div>';
+        const first = pageUnits[0];
+        if (first && !first.isTitle && first.sectionLabel){
+          inner += '<div class="section-continued">' + escapeHtml(first.sectionLabel) + opts.labels.continuedWord + '</div>';
+        }
+      }
+      inner += pageUnits.map(function(u){ return u.html; }).join('');
+      if (total > 1){ inner += '<div class="page-footer">' + opts.labels.pageOf(idx+1, total) + '</div>'; }
+      html += '<div class="sheet" dir="' + opts.dir + '">' + inner + '</div>';
+    });
+    container.innerHTML = html || ('<div class="sheet" dir="' + opts.dir + '"></div>');
+  }
+
+  // ============ Resume units ============
+  function resumeUnits(content, labels){
+    const units = [];
+    const contactBits = [content.location, content.email, content.phone, content.linkedin, content.website].filter(Boolean).map(escapeHtml).join('<span class="sep">|</span>');
+    const metaBits = [content.birthdate ? (labels.dobPrefix + escapeHtml(content.birthdate)) : '', content.nationality ? (labels.natPrefix + escapeHtml(content.nationality)) : ''].filter(Boolean).join('<span class="sep">|</span>');
+    let head = '<div class="unit" style="padding-bottom:20px;">';
+    head += '<div class="cv-name">' + (escapeHtml(content.name) || ('<span class="cv-empty">' + labels.yourName + '</span>')) + '</div>';
+    if (content.title) head += '<div class="cv-title">' + escapeHtml(content.title) + '</div>';
+    head += '<div class="cv-contact">' + (contactBits || ('<span class="cv-empty">' + labels.addContact + '</span>')) + '</div>';
+    if (metaBits) head += '<div class="cv-meta2">' + metaBits + '</div>';
+    head += '</div>';
+    units.push({ html: head, isTitle:false, sectionLabel:null });
+
+    if (content.summary){
+      units.push(titleUnit(labels.summary));
+      units.push({ html: '<div class="unit" style="padding-bottom:18px;"><p class="cv-summary">' + escapeHtml(content.summary) + '</p></div>', isTitle:false, sectionLabel:labels.summary });
+    }
+
+    const realExperience = content.experience.filter(function(e){ return e.company || e.role || e.bulletsText; });
+    if (realExperience.length){
+      units.push(titleUnit(labels.experience));
+      realExperience.forEach(function(e){
+        const bullets = bulletsFromText(e.bulletsText);
+        let h = '<div class="unit" style="padding-bottom:14px;"><div class="cv-item">';
+        h += '<div class="cv-item-head"><span class="cv-item-role">' + escapeHtml(e.role || labels.roleFallback) + '</span><span class="cv-item-meta">' + escapeHtml(joinDates(e.start, e.end)) + '</span></div>';
+        h += '<div class="cv-item-sub">' + [escapeHtml(e.company), escapeHtml(e.location)].filter(Boolean).join(' — ') + '</div>';
+        if (bullets.length) h += '<ul class="cv-bullets">' + bullets.map(function(b){ return '<li>' + escapeHtml(b) + '</li>'; }).join('') + '</ul>';
+        h += '</div></div>';
+        units.push({ html: h, isTitle:false, sectionLabel:labels.experience });
+      });
+    }
+
+    const realEducation = content.education.filter(function(e){ return e.school || e.degree; });
+    if (realEducation.length){
+      units.push(titleUnit(labels.education));
+      realEducation.forEach(function(e){
+        let h = '<div class="unit" style="padding-bottom:14px;"><div class="cv-item">';
+        h += '<div class="cv-item-head"><span class="cv-item-role">' + escapeHtml(e.degree || labels.degreeFallback) + '</span><span class="cv-item-meta">' + escapeHtml(joinDates(e.start, e.end)) + '</span></div>';
+        h += '<div class="cv-item-sub">' + [escapeHtml(e.school), escapeHtml(e.location)].filter(Boolean).join(' — ') + '</div>';
+        if (e.detail) h += '<div class="cv-item-sub">' + escapeHtml(e.detail) + '</div>';
+        h += '</div></div>';
+        units.push({ html: h, isTitle:false, sectionLabel:labels.education });
+      });
+    }
+
+    if (content.skills.length){
+      units.push(titleUnit(labels.skills));
+      units.push({ html: '<div class="unit" style="padding-bottom:6px;"><div class="cv-skills">' + content.skills.map(function(s){ return '<span class="cv-skill">' + escapeHtml(s) + '</span>'; }).join('') + '</div></div>', isTitle:false, sectionLabel:labels.skills });
+    }
+    if (content.languages.length){
+      units.push(titleUnit(labels.languages));
+      units.push({ html: '<div class="unit" style="padding-bottom:6px;"><div class="cv-skills">' + content.languages.map(function(s){ return '<span class="cv-skill">' + escapeHtml(s) + '</span>'; }).join('') + '</div></div>', isTitle:false, sectionLabel:labels.languages });
+    }
+    if (content.hobbies.length){
+      units.push(titleUnit(labels.hobbies));
+      units.push({ html: '<div class="unit" style="padding-bottom:6px;"><div class="cv-skills">' + content.hobbies.map(function(s){ return '<span class="cv-skill">' + escapeHtml(s) + '</span>'; }).join('') + '</div></div>', isTitle:false, sectionLabel:labels.hobbies });
+    }
+    if (content.additionalInfo){
+      units.push(titleUnit(labels.additional));
+      units.push({ html: '<div class="unit" style="padding-bottom:6px;"><p class="cv-summary">' + escapeHtml(content.additionalInfo) + '</p></div>', isTitle:false, sectionLabel:labels.additional });
+    }
+    return units;
+  }
+
+  // ============ Letter units ============
+  function letterUnits(content, labels, lang){
+    const l = content.letter;
+    const units = [];
+    const contactBits = [content.email, content.phone, content.location].filter(Boolean).map(escapeHtml).join('<span class="sep">|</span>');
+    let head = '<div class="unit" style="padding-bottom:22px;">';
+    head += '<div class="cv-name" style="font-size:22px;">' + (escapeHtml(content.name) || ('<span class="cv-empty">' + labels.yourName + '</span>')) + '</div>';
+    head += '<div class="cv-contact">' + (contactBits || ('<span class="cv-empty">' + labels.addContact + '</span>')) + '</div>';
+    head += '</div>';
+    units.push({ html: head, isTitle:false, sectionLabel:null });
+
+    const dateStr = new Date().toLocaleDateString(LOCALE_MAP[lang] || 'en-US', { year:'numeric', month:'long', day:'numeric', calendar:'gregory' });
+    let meta = '<div class="unit" style="padding-bottom:18px;">';
+    meta += '<div class="cl-date">' + dateStr + '</div>';
+    const recipientLine = l.recipient ? escapeHtml(l.recipient) : labels.hiringTeam;
+    meta += '<div class="cl-recipient">' + recipientLine + (l.company ? ('<br>' + escapeHtml(l.company)) : '') + '</div>';
+    meta += '</div>';
+    units.push({ html: meta, isTitle:false, sectionLabel:null });
+
+    units.push({ html: '<div class="unit" style="padding-bottom:12px;"><p class="cl-greeting">' + escapeHtml(buildGreeting(lang, l.recipient)) + '</p></div>', isTitle:false, sectionLabel:null });
+
+    const paragraphs = (l.body || "").split(/\n\s*\n/).map(function(p){ return p.trim(); }).filter(Boolean);
+    if (paragraphs.length){
+      paragraphs.forEach(function(p){
+        units.push({ html: '<div class="unit" style="padding-bottom:12px;"><p class="cl-para">' + escapeHtml(p).replace(/\n/g, '<br>') + '</p></div>', isTitle:false, sectionLabel:null });
+      });
+    } else {
+      units.push({ html: '<div class="unit" style="padding-bottom:12px;"><p class="cv-empty">' + escapeHtml(labels.letterEmptyBody) + '</p></div>', isTitle:false, sectionLabel:null });
+    }
+
+    units.push({ html: '<div class="unit"><p class="cl-close">' + escapeHtml(labels.sincerely) + '<br>' + (escapeHtml(content.name) || '&nbsp;') + '</p></div>', isTitle:false, sectionLabel:null });
+    return units;
+  }
+
+  // ============ Layout / visibility ============
+  let activeTab = 'resume';
+  let layoutScheduled = false;
+
+  function scheduleLayout(){
+    if (layoutScheduled) return;
+    layoutScheduled = true;
+    requestAnimationFrame(function(){ layoutScheduled = false; doLayout(); });
+  }
+
+  function doLayout(){
+    const lang = previewLang;
+    const labels = STRINGS[lang];
+    const dir = dirOf(lang);
+    const content = (lang === 'ar') ? state : (state.translations[lang] || state);
+    const effLang = (lang === 'ar' || state.translations[lang]) ? lang : 'ar';
+    const effLabels = STRINGS[effLang], effDir = dirOf(effLang);
+
+    renderPagesInto('pagesResume', paginate(resumeUnits(content, effLabels), effDir), { personName: content.name, docLabel: effLabels.resumeDocLabel, labels: effLabels, dir: effDir });
+    renderPagesInto('pagesLetter', paginate(letterUnits(content, effLabels, effLang), effDir), { personName: content.name, docLabel: effLabels.letterDocLabel, labels: effLabels, dir: effDir });
+    updateVisibility();
+  }
+
+  function markFirstSheet(){
+    document.querySelectorAll('.sheet').forEach(function(s){ s.classList.remove('first-sheet'); });
+    const letterEl = document.getElementById('pagesLetter');
+    const resumeEl = document.getElementById('pagesResume');
+    const letterVisible = letterEl.style.display !== 'none';
+    const resumeVisible = resumeEl.style.display !== 'none';
+    const firstContainer = letterVisible ? letterEl : (resumeVisible ? resumeEl : null);
+    if (firstContainer){
+      const firstSheet = firstContainer.querySelector('.sheet');
+      if (firstSheet) firstSheet.classList.add('first-sheet');
+    }
+  }
+
+  function updateVisibility(){
+    const combine = document.getElementById('combineCheck').checked;
+    const letterEl = document.getElementById('pagesLetter');
+    const resumeEl = document.getElementById('pagesResume');
+    if (combine){ letterEl.style.display = 'block'; resumeEl.style.display = 'block'; }
+    else {
+      letterEl.style.display = activeTab === 'letter' ? 'block' : 'none';
+      resumeEl.style.display = activeTab === 'resume' ? 'block' : 'none';
+    }
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-tab') === activeTab); });
+    document.getElementById('tabsWrap').style.opacity = combine ? '0.45' : '1';
+    document.getElementById('tabsWrap').style.pointerEvents = combine ? 'none' : 'auto';
+    const dlBtn = document.getElementById('downloadBtn');
+    if (sb && !isUnlocked()){
+      dlBtn.textContent = 'فتح التحميل (دفعة واحدة)';
+    } else {
+      dlBtn.textContent = combine ? 'تحميل PDF لكل المستندات' : (activeTab === 'resume' ? 'تحميل PDF للسيرة الذاتية' : 'تحميل PDF للخطاب');
+    }
+    markFirstSheet();
+  }
+
+  document.getElementById('tmplSwitch').addEventListener('click', function(e){
+    const btn = e.target.closest('.lang-btn');
+    if (!btn) return;
+    const tmpl = btn.getAttribute('data-tmpl');
+    document.querySelectorAll('#tmplSwitch .lang-btn').forEach(function(b){ b.classList.toggle('active', b === btn); });
+    ['pagesResume', 'pagesLetter'].forEach(function(id){
+      const el = document.getElementById(id);
+      if (tmpl === 'classic') el.removeAttribute('data-template');
+      else el.setAttribute('data-template', tmpl);
+    });
+  });
+
+  document.getElementById('desk').addEventListener('click', function(e){
+    const head = e.target.closest('.section-head');
+    if (!head) return;
+    const section = head.closest('.section');
+    if (section) section.classList.toggle('collapsed');
+  });
+
+  document.getElementById('tabResume').addEventListener('click', function(){ activeTab = 'resume'; updateVisibility(); });
+  document.getElementById('tabLetter').addEventListener('click', function(){ activeTab = 'letter'; updateVisibility(); });
+  document.getElementById('combineCheck').addEventListener('change', updateVisibility);
+  document.getElementById('downloadBtn').addEventListener('click', function(){
+    if (sb && !currentUser){ alert('سجّل الدخول أولاً من الأعلى (بريدك الإلكتروني)، ثم أكمل الدفع لفتح التحميل.'); return; }
+    if (sb && !isUnlocked()){ window.open(GUMROAD_LINK, '_blank'); return; }
+    window.print();
+  });
+
+  // ============ Accounts: login, per-user save, and payment unlock ============
+  const SUPABASE_URL = "https://bhcxptbnoobhspurzgbe.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_qODw3t7tKDtw5DGASlFL8Q_NNnDT1Vb";
+  const GUMROAD_LINK = "PASTE_YOUR_GUMROAD_LINK_HERE";
+  const sb = (SUPABASE_URL.indexOf('http') === 0 && window.supabase)
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+
+  let currentUser = null;
+  let cloudRow = null;
+  let saveTimer = null;
+
+  function isUnlocked(){ return !!(cloudRow && cloudRow.unlocked); }
+
+  function setAuthUI(){
+    const out = document.getElementById('authLoggedOut');
+    const inn = document.getElementById('authLoggedIn');
+    const status = document.getElementById('authStatus');
+    if (currentUser){
+      out.style.display = 'none'; inn.style.display = 'flex';
+      document.getElementById('authEmailLabel').textContent = currentUser.email;
+      status.style.display = 'none';
+    } else {
+      out.style.display = 'flex'; inn.style.display = 'none';
+      status.style.display = 'none';
+    }
+  }
+
+  async function afterLogin(){
+    const { data } = await sb.from('cv_data').select('*').eq('user_id', currentUser.id).maybeSingle();
+    if (data){
+      cloudRow = data;
+      if (data.data && Object.keys(data.data).length){
+        Object.assign(state, data.data);
+        syncFormFromState();
+        renderExperienceForm();
+        renderEducationForm();
+        markDirty();
+        scheduleLayout();
+      }
+    } else {
+      cloudRow = { unlocked: false, data: {} };
+      await sb.from('cv_data').upsert({ user_id: currentUser.id, data: state, unlocked: false });
+    }
+    await maybeUnlockFromPaymentRedirect();
+    updateVisibility();
+  }
+
+  async function maybeUnlockFromPaymentRedirect(){
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('paid') === 'true' && currentUser){
+      await sb.from('cv_data').update({ unlocked: true }).eq('user_id', currentUser.id);
+      if (cloudRow) cloudRow.unlocked = true;
+      history.replaceState({}, '', window.location.pathname);
+    }
+  }
+
+  function queueCloudSave(){
+    if (!currentUser || !sb) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(async function(){
+      await sb.from('cv_data').upsert({ user_id: currentUser.id, data: state, updated_at: new Date().toISOString() });
+    }, 1200);
+  }
+
+  async function initAuth(){
+    const row = document.getElementById('authRow');
+    if (!sb){ row.style.display = 'none'; return; }
+    const { data: { session } } = await sb.auth.getSession();
+    currentUser = session ? session.user : null;
+    setAuthUI();
+    if (currentUser) await afterLogin();
+    sb.auth.onAuthStateChange(async function(event, session){
+      currentUser = session ? session.user : null;
+      setAuthUI();
+      if (currentUser) await afterLogin();
+      else { cloudRow = null; updateVisibility(); }
+    });
+  }
+
+  document.getElementById('authSendLink').addEventListener('click', async function(){
+    const email = document.getElementById('authEmail').value.trim();
+    const statusEl = document.getElementById('authStatus');
+    if (!email || !sb) return;
+    this.disabled = true;
+    const { error } = await sb.auth.signInWithOtp({ email: email });
+    this.disabled = false;
+    statusEl.style.display = 'block';
+    if (error){
+      statusEl.textContent = 'تعذّر الإرسال، حاول مجدداً.';
+    } else {
+      statusEl.textContent = 'تم إرسال رمز مكوّن من 6 أرقام إلى بريدك — تحقّق من مجلد الرسائل غير المرغوبة إن لم يصل خلال دقيقة.';
+      document.getElementById('authEmail').disabled = true;
+      document.getElementById('authCode').style.display = 'inline-block';
+      document.getElementById('authVerifyCode').style.display = 'inline-block';
+      this.style.display = 'none';
+    }
+  });
+  document.getElementById('authVerifyCode').addEventListener('click', async function(){
+    const email = document.getElementById('authEmail').value.trim();
+    const code = document.getElementById('authCode').value.trim();
+    const statusEl = document.getElementById('authStatus');
+    if (!code || !sb) return;
+    this.disabled = true;
+    const { error } = await sb.auth.verifyOtp({ email: email, token: code, type: 'email' });
+    this.disabled = false;
+    if (error){
+      statusEl.style.display = 'block';
+      statusEl.textContent = 'الرمز غير صحيح أو منتهي الصلاحية، أعد المحاولة.';
+    }
+  });
+  document.getElementById('authLogout').addEventListener('click', async function(){
+    if (sb) await sb.auth.signOut();
+    currentUser = null; cloudRow = null;
+    document.getElementById('authEmail').value = ''; document.getElementById('authEmail').disabled = false;
+    document.getElementById('authCode').value = ''; document.getElementById('authCode').style.display = 'none';
+    document.getElementById('authVerifyCode').style.display = 'none';
+    document.getElementById('authSendLink').style.display = 'inline-block';
+    setAuthUI(); updateVisibility();
+  });
+
+
+
+  document.getElementById('langSwitch').addEventListener('click', async function(e){
+    const btn = e.target.closest('.lang-btn');
+    if (!btn) return;
+    const lang = btn.getAttribute('data-lang');
+    if (lang === previewLang) return;
+    const statusEl = document.getElementById('langStatus');
+    if (lang === 'ar' || state.translations[lang]){
+      previewLang = lang; setActiveLangBtn(lang); scheduleLayout(); setStatus(statusEl, ''); return;
+    }
+    setStatus(statusEl, "جارٍ الترجمة…");
+    document.querySelectorAll('.lang-btn').forEach(function(b){ b.disabled = true; });
+    try {
+      await translateAll(lang);
+      previewLang = lang; setActiveLangBtn(lang); scheduleLayout(); setStatus(statusEl, '');
+    } catch(err){ setStatus(statusEl, "تعذّرت الترجمة: " + (err && err.message ? err.message : "خطأ غير معروف"), true); }
+    document.querySelectorAll('.lang-btn').forEach(function(b){ b.disabled = false; });
+  });
+
+  window.addEventListener('resize', function(){ clearTimeout(window.__deskResize); window.__deskResize = setTimeout(scheduleLayout, 150); });
+  if (document.fonts && document.fonts.ready){ document.fonts.ready.then(scheduleLayout); }
+
+  // ---------- Static field bindings ----------
+  function bindField(id, field){
+    const el = document.getElementById(id);
+    el.addEventListener('input', function(){ state[field] = el.value; markDirty(); scheduleLayout(); });
+  }
+  function bindListField(id, field){
+    const el = document.getElementById(id);
+    el.addEventListener('input', function(){ state[field] = el.value.split(',').map(function(s){ return s.trim(); }).filter(Boolean); markDirty(); scheduleLayout(); });
+  }
+  function bindLetterField(id, field){
+    const el = document.getElementById(id);
+    el.addEventListener('input', function(){ state.letter[field] = el.value; markDirty(); scheduleLayout(); });
+  }
+  bindField('f-name','name'); bindField('f-birthdate','birthdate'); bindField('f-nationality','nationality');
+  bindField('f-title','title'); bindField('f-email','email'); bindField('f-phone','phone');
+  bindField('f-location','location'); bindField('f-linkedin','linkedin'); bindField('f-website','website');
+  bindField('f-summary','summary'); bindField('f-additional','additionalInfo');
+  bindListField('f-skills','skills'); bindListField('f-languages','languages'); bindListField('f-hobbies','hobbies');
+  bindLetterField('f-letter-company','company'); bindLetterField('f-letter-role','role');
+  bindLetterField('f-letter-recipient','recipient'); bindLetterField('f-letter-notes','notes');
+  bindLetterField('f-letter-body','body');
+
+  function syncFormFromState(){
+    document.getElementById('f-name').value = state.name || "";
+    document.getElementById('f-birthdate').value = state.birthdate || "";
+    document.getElementById('f-nationality').value = state.nationality || "";
+    document.getElementById('f-title').value = state.title || "";
+    document.getElementById('f-email').value = state.email || "";
+    document.getElementById('f-phone').value = state.phone || "";
+    document.getElementById('f-location').value = state.location || "";
+    document.getElementById('f-linkedin').value = state.linkedin || "";
+    document.getElementById('f-website').value = state.website || "";
+    document.getElementById('f-summary').value = state.summary || "";
+    document.getElementById('f-additional').value = state.additionalInfo || "";
+    document.getElementById('f-skills').value = (state.skills || []).join('، ');
+    document.getElementById('f-languages').value = (state.languages || []).join('، ');
+    document.getElementById('f-hobbies').value = (state.hobbies || []).join('، ');
+    document.getElementById('f-letter-company').value = state.letter.company || "";
+    document.getElementById('f-letter-role').value = state.letter.role || "";
+    document.getElementById('f-letter-recipient').value = state.letter.recipient || "";
+    document.getElementById('f-letter-notes').value = state.letter.notes || "";
+    document.getElementById('f-letter-body').value = state.letter.body || "";
+  }
+
+  // ---------- Experience form ----------
+  const experienceList = document.getElementById('experienceList');
+  function renderExperienceForm(){
+    experienceList.innerHTML = state.experience.map(function(e, idx){
+      return '<div class="entry" data-id="' + e.id + '">' +
+        '<div class="entry-top"><span class="entry-index">الوظيفة ' + (idx+1) + '</span>' +
+        '<button class="btn subtle" data-action="remove-exp" data-id="' + e.id + '">حذف</button></div>' +
+        '<div class="field-row">' +
+          '<div class="field"><label>المسمى الوظيفي</label><input data-field="role" data-id="' + e.id + '" value="' + escAttr(e.role) + '" placeholder="أخصائية تسويق"></div>' +
+          '<div class="field"><label>اسم الشركة</label><input data-field="company" data-id="' + e.id + '" value="' + escAttr(e.company) + '" placeholder="شركة النور التجارية"></div>' +
+        '</div>' +
+        '<div class="field-row">' +
+          '<div class="field"><label>الموقع</label><input data-field="location" data-id="' + e.id + '" value="' + escAttr(e.location) + '" placeholder="دبي"></div>' +
+          '<div class="field"><label>التواريخ</label><div style="display:flex; gap:6px;">' +
+            '<input data-field="start" data-id="' + e.id + '" value="' + escAttr(e.start) + '" placeholder="2020" style="width:50%">' +
+            '<input data-field="end" data-id="' + e.id + '" value="' + escAttr(e.end) + '" placeholder="حتى الآن" style="width:50%">' +
+          '</div></div>' +
+        '</div>' +
+        '<div class="field"><label>أهم المهام (كلمات مفتاحية تكفي)</label>' +
+          '<textarea data-field="bulletsText" data-id="' + e.id + '" style="min-height:80px" placeholder="إشراف على الحسابات، إعداد الموازنات، متابعة التدقيق...">' + escapeHtml(e.bulletsText) + '</textarea></div>' +
+        '<div class="row-actions"><button class="btn ai" data-action="ai-exp" data-id="' + e.id + '">صياغة بالذكاء الاصطناعي</button>' +
+          '<span class="ai-status" data-status-exp="' + e.id + '"></span></div>' +
+      '</div>';
+    }).join('');
+  }
+
+  experienceList.addEventListener('input', function(e){
+    const t = e.target, field = t.getAttribute('data-field'), id = t.getAttribute('data-id');
+    if (!field || !id) return;
+    const entry = state.experience.find(function(x){ return x.id === id; });
+    if (entry){ entry[field] = t.value; markDirty(); scheduleLayout(); }
+  });
+
+  experienceList.addEventListener('click', async function(e){
+    const removeBtn = e.target.closest('[data-action="remove-exp"]');
+    if (removeBtn){
+      state.experience = state.experience.filter(function(x){ return x.id !== removeBtn.getAttribute('data-id'); });
+      renderExperienceForm(); markDirty(); scheduleLayout(); return;
+    }
+    const aiBtn = e.target.closest('[data-action="ai-exp"]');
+    if (aiBtn){
+      const id = aiBtn.getAttribute('data-id');
+      const entry = state.experience.find(function(x){ return x.id === id; });
+      const statusEl = experienceList.querySelector('[data-status-exp="' + id + '"]');
+      if (!entry) return;
+      if (!entry.bulletsText.trim()){ setStatus(statusEl, "أضف كلمات مفتاحية أولاً.", true); return; }
+      aiBtn.disabled = true; setStatus(statusEl, "جارٍ الصياغة…");
+      try {
+        const raw = await callClaude(
+          'المسمى الوظيفي: ' + (entry.role || 'غير محدد') + '\nاسم الشركة: ' + (entry.company || 'غير محدد') +
+          '\nملاحظات خام، سطر لكل نقطة:\n' + entry.bulletsText +
+          '\n\nأعد صياغة هذه النقاط كثلاث إلى خمس نقاط مهنية للسيرة الذاتية. كل نقطة تبدأ بفعل قوي في صيغة الماضي، وتبقى محددة وواقعية بناءً على ما ذُكر فقط، ولا تخترع أرقاماً أو نسباً لم تُذكر. ' + ARABIC_STYLE + ' أرجع فقط مصفوفة JSON من النصوص، بدون أي شيء آخر.',
+          { system: 'أنت محرر سير ذاتية محترف ودقيق. عند الطلب بصيغة JSON، ترجع JSON صالحاً فقط بدون أي تعليق أو علامات markdown.' }
+        );
+        const bullets = parseJSONLoose(raw);
+        if (!Array.isArray(bullets)) throw new Error('shape');
+        entry.bulletsText = bullets.join('\n');
+        renderExperienceForm(); markDirty(); scheduleLayout();
+      } catch(err){
+        setStatus(statusEl, "تعذّرت الصياغة الآن.", true);
+        aiBtn.disabled = false;
+      }
+    }
+  });
+
+  document.getElementById('addExperience').addEventListener('click', function(){
+    state.experience.push(newExperience()); renderExperienceForm(); markDirty(); scheduleLayout();
+  });
+
+  // ---------- Education form ----------
+  const educationList = document.getElementById('educationList');
+  function renderEducationForm(){
+    educationList.innerHTML = state.education.map(function(e, idx){
+      return '<div class="entry" data-id="' + e.id + '">' +
+        '<div class="entry-top"><span class="entry-index">الشهادة ' + (idx+1) + '</span>' +
+        '<button class="btn subtle" data-action="remove-edu" data-id="' + e.id + '">حذف</button></div>' +
+        '<div class="field-row">' +
+          '<div class="field"><label>الشهادة</label><input data-field="degree" data-id="' + e.id + '" value="' + escAttr(e.degree) + '" placeholder="بكالوريوس محاسبة"></div>' +
+          '<div class="field"><label>الجامعة</label><input data-field="school" data-id="' + e.id + '" value="' + escAttr(e.school) + '" placeholder="..."></div>' +
+        '</div>' +
+        '<div class="field-row">' +
+          '<div class="field"><label>الموقع</label><input data-field="location" data-id="' + e.id + '" value="' + escAttr(e.location) + '" placeholder="..."></div>' +
+          '<div class="field"><label>التواريخ</label><div style="display:flex; gap:6px;">' +
+            '<input data-field="start" data-id="' + e.id + '" value="' + escAttr(e.start) + '" placeholder="2003" style="width:50%">' +
+            '<input data-field="end" data-id="' + e.id + '" value="' + escAttr(e.end) + '" placeholder="2007" style="width:50%">' +
+          '</div></div>' +
+        '</div>' +
+        '<div class="field"><label>تفاصيل إضافية (اختياري)</label><input data-field="detail" data-id="' + e.id + '" value="' + escAttr(e.detail) + '" placeholder="بتقدير امتياز"></div>' +
+      '</div>';
+    }).join('');
+  }
+
+  educationList.addEventListener('input', function(e){
+    const t = e.target, field = t.getAttribute('data-field'), id = t.getAttribute('data-id');
+    if (!field || !id) return;
+    const entry = state.education.find(function(x){ return x.id === id; });
+    if (entry){ entry[field] = t.value; markDirty(); scheduleLayout(); }
+  });
+
+  educationList.addEventListener('click', function(e){
+    const removeBtn = e.target.closest('[data-action="remove-edu"]');
+    if (removeBtn){
+      state.education = state.education.filter(function(x){ return x.id !== removeBtn.getAttribute('data-id'); });
+      renderEducationForm(); markDirty(); scheduleLayout();
+    }
+  });
+
+  document.getElementById('addEducation').addEventListener('click', function(){
+    state.education.push(newEducation()); renderEducationForm(); markDirty(); scheduleLayout();
+  });
+
+  // ---------- Summary AI ----------
+  document.getElementById('summaryAiBtn').addEventListener('click', async function(){
+    const btn = this, statusEl = document.getElementById('summaryStatus');
+    const context = [
+      state.title ? ('المسمى الوظيفي المطلوب: ' + state.title) : '',
+      state.skills.length ? ('المهارات: ' + state.skills.join('، ')) : '',
+      state.experience.length ? ('الخبرات: ' + state.experience.map(function(e){ return [e.role, e.company].filter(Boolean).join(' في '); }).filter(Boolean).join('؛ ')) : '',
+      state.summary ? ('ملاحظات خام للنبذة: ' + state.summary) : 'لا توجد ملاحظات، اكتب من المسمى والخبرات أعلاه.'
+    ].filter(Boolean).join('\n');
+    btn.disabled = true; setStatus(statusEl, "جارٍ الصياغة…");
+    try {
+      const text = await callClaude(
+        context + '\n\nاكتب نبذة مهنية من سطرين إلى ثلاثة أسطر لأعلى السيرة الذاتية، بثقة ودون مبالغة، مستندة فقط إلى ما ذُكر أعلاه. ' + ARABIC_STYLE + ' أرجع النص فقط دون علامات تنصيص أو أي مقدمة.',
+        { system: 'أنت محرر سير ذاتية محترف ودقيق. ترجع فقط النص المطلوب دون أي مقدمة أو تعليق.' }
+      );
+      state.summary = text.replace(/^"+|"+$/g, '').trim();
+      document.getElementById('f-summary').value = state.summary;
+      markDirty(); scheduleLayout(); setStatus(statusEl, "");
+    } catch(err){ setStatus(statusEl, "تعذّرت الصياغة الآن.", true); }
+    btn.disabled = false;
+  });
+
+  // ---------- Additional info AI ----------
+  document.getElementById('additionalAiBtn').addEventListener('click', async function(){
+    const btn = this, statusEl = document.getElementById('additionalStatus');
+    if (!state.additionalInfo.trim()){ setStatus(statusEl, "أضف ملاحظات أولاً.", true); return; }
+    btn.disabled = true; setStatus(statusEl, "جارٍ الصياغة…");
+    try {
+      const text = await callClaude(
+        'ملاحظات خام:\n' + state.additionalInfo + '\n\nأعد صياغتها كسطر أو سطرين مهنيين لقسم "معلومات إضافية" في السيرة الذاتية، بناءً على ما ذُكر فقط دون إضافة أي شيء جديد. ' + ARABIC_STYLE + ' أرجع النص فقط.',
+        { system: 'أنت محرر سير ذاتية محترف ودقيق. ترجع فقط النص المطلوب دون أي مقدمة.' }
+      );
+      state.additionalInfo = text.replace(/^"+|"+$/g, '').trim();
+      document.getElementById('f-additional').value = state.additionalInfo;
+      markDirty(); scheduleLayout(); setStatus(statusEl, "");
+    } catch(err){ setStatus(statusEl, "تعذّرت الصياغة الآن.", true); }
+    btn.disabled = false;
+  });
+
+  // ---------- Letter AI ----------
+  document.getElementById('letterAiBtn').addEventListener('click', async function(){
+    const btn = this, statusEl = document.getElementById('letterStatus'), l = state.letter;
+    if (!l.company && !l.role && !l.notes){ setStatus(statusEl, "أضف الوظيفة أو الشركة أو ملاحظات أولاً.", true); return; }
+    btn.disabled = true; setStatus(statusEl, "جارٍ الصياغة…");
+    const context = [
+      state.title ? ('المسمى المطلوب: ' + state.title) : '',
+      state.summary ? ('نبذة عن المتقدم: ' + state.summary) : '',
+      state.experience.length ? ('خبرات المتقدم: ' + state.experience.map(function(e){ return [e.role, e.company].filter(Boolean).join(' في '); }).filter(Boolean).join('؛ ')) : '',
+      state.skills.length ? ('مهارات المتقدم: ' + state.skills.join('، ')) : '',
+      l.role ? ('يتقدم لوظيفة: ' + l.role) : '',
+      l.company ? ('في شركة: ' + l.company) : '',
+      l.notes ? ('ملاحظات أو نص الإعلان الوظيفي: ' + l.notes) : ''
+    ].filter(Boolean).join('\n');
+    try {
+      const text = await callClaude(
+        context + '\n\nاكتب نص خطاب تقديم من ثلاث فقرات قصيرة: فقرة افتتاحية تذكر الوظيفة وتُظهر اهتماماً حقيقياً، وفقرة وسطى تربط خبرة المتقدم الفعلية أعلاه بما تحتاجه الوظيفة، وفقرة ختامية قصيرة تدعو للتواصل. لا تخترع أي معلومة عن خبرة المتقدم غير المذكورة أعلاه. ' + ARABIC_STYLE + ' اترك سطراً فارغاً بين الفقرات. أرجع نص الخطاب فقط، دون تحية في البداية أو توقيع في النهاية، ودون علامات تنصيص.',
+        { system: 'أنت كاتب خطابات تقديم وظيفية محترف ودقيق. ترجع فقط النص المطلوب دون أي إضافات غير مذكورة.' }
+      );
+      l.body = text.replace(/^"+|"+$/g, '').trim();
+      document.getElementById('f-letter-body').value = l.body;
+      markDirty(); scheduleLayout(); setStatus(statusEl, "");
+    } catch(err){ setStatus(statusEl, "تعذّرت الصياغة الآن.", true); }
+    btn.disabled = false;
+  });
+
+  // ---------- Quick-start full draft ----------
+  document.getElementById('quickstartBtn').addEventListener('click', async function(){
+    const btn = this, statusEl = document.getElementById('quickstartStatus');
+    const input = document.getElementById('quickstartInput').value.trim();
+    if (!input){ setStatus(statusEl, "ألصق نصاً أولاً.", true); return; }
+    btn.disabled = true; setStatus(statusEl, "جارٍ الصياغة…");
+    const schema = '{"name":"","birthdate":"","nationality":"","title":"","email":"","phone":"","location":"","linkedin":"","website":"","summary":"","experience":[{"company":"","role":"","location":"","start":"","end":"","bullets":["..."]}],"education":[{"school":"","degree":"","location":"","start":"","end":"","detail":""}],"skills":["..."],"languages":["..."],"hobbies":["..."],"additionalInfo":"","targetCompany":"","targetRole":""}';
+    try {
+      const raw = await callClaude(
+        'نص خام من المستخدم:\n"""\n' + input + '\n"""\n\nاستخرج منه مسودة أولى لسيرة ذاتية بصيغة JSON صارمة تطابق تماماً هذا المخطط (استخدم نصاً فارغاً "" أو مصفوفة فارغة [] لأي شيء غير معروف، ولا تخترع أبداً أسماء شركات أو تواريخ أو جامعات أو أرقاماً لم تُذكر أو تُفهم ضمناً بوضوح؛ إن ذُكرت شركة أو وظيفة محددة يتقدم المستخدم لها، ضعها في targetCompany / targetRole):\n' + schema + '\n\n' + ARABIC_STYLE + ' أرجع فقط كائن JSON، دون أي نص إضافي أو علامات markdown.',
+        { system: 'أنت خبير في كتابة السير الذاتية. ترجع فقط JSON صالحاً عند الطلب بذلك، دون أي تعليق أو معلومات مُلفّقة.', maxTokens: 4096 }
+      );
+      applyDraft(parseJSONLoose(raw));
+      setStatus(statusEl, "تمت الصياغة. نقّح ما تريد أدناه.");
+    } catch(err){ setStatus(statusEl, "تعذّرت الصياغة: " + (err && err.message ? err.message : "خطأ غير معروف"), true); }
+    btn.disabled = false;
+  });
+
+  function applyDraft(draft){
+    state.name = draft.name || state.name;
+    state.birthdate = draft.birthdate || state.birthdate;
+    state.nationality = draft.nationality || state.nationality;
+    state.title = draft.title || state.title;
+    state.email = draft.email || state.email;
+    state.phone = draft.phone || state.phone;
+    state.location = draft.location || state.location;
+    state.linkedin = draft.linkedin || state.linkedin;
+    state.website = draft.website || state.website;
+    state.summary = draft.summary || state.summary;
+    state.additionalInfo = draft.additionalInfo || state.additionalInfo;
+    state.skills = (draft.skills && draft.skills.length) ? draft.skills : state.skills;
+    state.languages = (draft.languages && draft.languages.length) ? draft.languages : state.languages;
+    state.hobbies = (draft.hobbies && draft.hobbies.length) ? draft.hobbies : state.hobbies;
+
+    if (Array.isArray(draft.experience) && draft.experience.length){
+      state.experience = draft.experience.map(function(e){
+        return { id: uid(), company: e.company || "", role: e.role || "", location: e.location || "", start: e.start || "", end: e.end || "",
+          bulletsText: Array.isArray(e.bullets) ? e.bullets.join('\n') : (e.bullets || "") };
+      });
+    }
+    if (Array.isArray(draft.education) && draft.education.length){
+      state.education = draft.education.map(function(e){
+        return { id: uid(), school: e.school || "", degree: e.degree || "", location: e.location || "", start: e.start || "", end: e.end || "", detail: e.detail || "" };
+      });
+    }
+    if (draft.targetCompany) state.letter.company = draft.targetCompany;
+    if (draft.targetRole) state.letter.role = draft.targetRole;
+
+    syncFormFromState();
+    renderExperienceForm();
+    renderEducationForm();
+    document.querySelectorAll('#desk .section').forEach(function(s){ s.classList.remove('collapsed'); });
+    markDirty();
+    scheduleLayout();
+  }
+
+  // ---------- Init ----------
+  renderExperienceForm();
+  renderEducationForm();
+  scheduleLayout();
+  initAuth();
+})();
+</script>
+</body>
+</html>
