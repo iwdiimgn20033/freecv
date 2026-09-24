@@ -198,19 +198,19 @@
 <body>
 
   <div class="app-header">
-    <h1>مكتب الصياغة</h1>
-    <p>عبّئ المعلومات في النموذج الاسترشادي على اليمين، أو ألصق ملاحظات سريعة في مربع البداية السريعة ليقوم الذكاء الاصطناعي بصياغة أول نسخة. يمكنك أيضاً عرض السيرة الذاتية وخطاب التقديم بالإنجليزية أو الإسبانية أو الفرنسية من أعلى المعاينة.</p>
+    <h1 data-i18n="appTitle">مكتب الصياغة</h1>
+    <p data-i18n="appSubtitle">عبّئ المعلومات في النموذج الاسترشادي على اليمين، أو ألصق ملاحظات سريعة في مربع البداية السريعة ليقوم الذكاء الاصطناعي بصياغة أول نسخة. يمكنك أيضاً عرض السيرة الذاتية وخطاب التقديم بالإنجليزية أو الإسبانية أو الفرنسية من أعلى المعاينة.</p>
     <div class="auth-row" id="authRow">
       <span class="auth-status" id="authStatus">جارٍ التحقق من تسجيل الدخول…</span>
       <div id="authLoggedOut" style="display:none; gap:10px; align-items:center; flex-wrap:wrap;">
-        <input id="authEmail" type="email" placeholder="بريدك الإلكتروني لحفظ بياناتك">
-        <button class="btn ai" id="authSendLink">إرسال رابط التفعيل</button>
-        <input id="authCode" type="text" inputmode="numeric" placeholder="رابط التفعيل" style="display:none; width:120px;">
-        <button class="btn ai" id="authVerifyCode" style="display:none;">تأكيد الرمز</button>
+        <input id="authEmail" type="email" data-i18n-ph="authEmailPh" placeholder="بريدك الإلكتروني لحفظ بياناتك">
+        <button class="btn ai" id="authSendLink" data-i18n="authSendCode">إرسال رمز التفعيل</button>
+        <input id="authCode" type="text" inputmode="numeric" placeholder="رمز التفعيل" style="display:none; width:120px;">
+        <button class="btn ai" id="authVerifyCode" style="display:none;" data-i18n="authVerify">تأكيد الرمز</button>
       </div>
       <div id="authLoggedIn" style="display:none; gap:10px; align-items:center;">
         <span id="authEmailLabel" style="font-size:13px; color:var(--text); font-weight:600;"></span>
-        <button class="btn subtle" id="authLogout">تسجيل الخروج</button>
+        <button class="btn subtle" id="authLogout" data-i18n="authLogout">تسجيل الخروج</button>
       </div>
     </div>
     <div class="progress-row">
@@ -223,20 +223,20 @@
     <div class="desk" id="desk">
 
       <div class="quickstart">
-        <div class="tag">بداية سريعة</div>
-        <h2>صياغة كل شيء دفعة واحدة</h2>
-        <p>ألصق خبرتك بشكل حر، أو سيرة ذاتية قديمة، أو حتى إعلان الوظيفة التي تتقدم لها. سيقوم المكتب بصياغة أول نسخة كاملة أدناه، وتستطيع تنقيحها بعد ذلك.</p>
-        <textarea id="quickstartInput" placeholder="مثال: اسمي ...، عملت أخصائية تسويق في شركة اتصالات من 2018 إلى 2021 في الرياض، ثم محللة بيانات في شركة تجزئة بدبي من 2021 إلى 2024، أتقدم الآن لوظيفة مدير تسويق في شركة..."></textarea>
+        <div class="tag" data-i18n="qsTag">بداية سريعة</div>
+        <h2 data-i18n="qsTitle">صياغة كل شيء دفعة واحدة</h2>
+        <p data-i18n="qsDesc">ألصق خبرتك بشكل حر، أو سيرة ذاتية قديمة، أو حتى إعلان الوظيفة التي تتقدم لها. سيقوم المكتب بصياغة أول نسخة كاملة أدناه، وتستطيع تنقيحها بعد ذلك.</p>
+        <textarea id="quickstartInput" data-i18n-ph="qsPlaceholder" placeholder="مثال: اسمي سارة، عملت أخصائية تسويق في شركة اتصالات من 2018 إلى 2021 في الرياض، ثم محللة بيانات في شركة تجزئة بدبي من 2021 إلى 2024، أتقدم الآن لوظيفة مدير تسويق في شركة..."></textarea>
         <div class="row-actions">
-          <button class="btn ai" id="quickstartBtn">ابدأ الصياغة</button>
+          <button class="btn ai" id="quickstartBtn" data-i18n="qsBtn">ابدأ الصياغة</button>
           <span class="ai-status" id="quickstartStatus"></span>
         </div>
       </div>
 
       <div class="section" data-section="personal">
-        <div class="section-head"><h3>١. المعلومات الشخصية</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="sec1">١. المعلومات الشخصية</h3><span class="chevron">▾</span></div>
         <div class="section-body">
-        <div class="field"><label for="f-name">الاسم الكامل</label><input id="f-name" placeholder="فلان  "></div>
+        <div class="field"><label for="f-name" data-i18n="lblName">الاسم الكامل</label><input id="f-name" placeholder="سارة أحمد"></div>
         <div class="field">
           <label>صورة شخصية (اختياري)</label>
           <div style="display:flex; align-items:center; gap:10px;">
@@ -245,117 +245,117 @@
             <button class="btn" id="photoPickBtn" type="button">اختيار صورة</button>
             <button class="btn subtle" id="photoRemoveBtn" type="button" style="display:none;">إزالة الصورة</button>
           </div>
-          <div class="section-note" style="margin:6px 0 0;">لن تظهر الصورة إن فعّلت «النمط الدولي» أدناه — أغلب الشركات الأمريكية والأوروبية لا تفضّل الصور في السيرة الذاتية.</div>
+          <div class="section-note" style="margin:6px 0 0;"><span data-i18n="lblPhotoNote">لن تظهر الصورة إن فعّلت «النمط الدولي» أدناه — أغلب الشركات الأمريكية والأوروبية لا تفضّل الصور في السيرة الذاتية.</span></div>
         </div>
         <div class="field-row">
-          <div class="field"><label for="f-birthdate">تاريخ الميلاد</label><input id="f-birthdate" placeholder="29/11/1984"></div>
-          <div class="field"><label for="f-nationality">الجنسية (اختياري)</label><input id="f-nationality" placeholder="..."></div>
+          <div class="field"><label for="f-birthdate" data-i18n="lblBirthdate">تاريخ الميلاد</label><input id="f-birthdate" placeholder="29/11/1984"></div>
+          <div class="field"><label for="f-nationality" data-i18n="lblNationality">الجنسية (اختياري)</label><input id="f-nationality" placeholder="..."></div>
         </div>
         <div class="field-row">
-          <div class="field"><label for="f-phone">رقم الهاتف</label><input id="f-phone" placeholder="+971 5x xxx xxxx"></div>
-          <div class="field"><label for="f-email">البريد الإلكتروني</label><input id="f-email" placeholder="name@email.com"></div>
+          <div class="field"><label for="f-phone" data-i18n="lblPhone">رقم الهاتف</label><input id="f-phone" placeholder="+971 5x xxx xxxx"></div>
+          <div class="field"><label for="f-email" data-i18n="lblEmail">البريد الإلكتروني</label><input id="f-email" placeholder="name@email.com"></div>
         </div>
         <div class="field-row">
-          <div class="field"><label for="f-location">مكان الإقامة</label><input id="f-location" placeholder="دبي، الإمارات"></div>
-          <div class="field"><label for="f-linkedin">لينكدإن (اختياري)</label><input id="f-linkedin" placeholder="linkedin.com/in/..."></div>
+          <div class="field"><label for="f-location" data-i18n="lblLocation">مكان الإقامة</label><input id="f-location" placeholder="دبي، الإمارات"></div>
+          <div class="field"><label for="f-linkedin" data-i18n="lblLinkedin">لينكدإن (اختياري)</label><input id="f-linkedin" placeholder="linkedin.com/in/..."></div>
         </div>
-        <div class="field"><label for="f-website">موقع شخصي (اختياري)</label><input id="f-website" placeholder="..."></div>
-        <div class="field" style="margin-top:4px;"><label style="display:flex; align-items:center; gap:6px; font-weight:500; cursor:pointer;"><input type="checkbox" id="f-hide-personal" style="width:auto;"> نمط دولي: إخفاء تاريخ الميلاد والجنسية من السيرة الذاتية</label></div>
-        <div class="field" style="margin-top:4px;"><label style="display:flex; align-items:center; gap:6px; font-weight:500; cursor:pointer;"><input type="checkbox" id="f-show-qr" style="width:auto;"> إظهار رمز QR في السيرة الذاتية (يربط لِلينكدإن أو موقعك الشخصي)</label></div>
+        <div class="field"><label for="f-website" data-i18n="lblWebsite">موقع شخصي (اختياري)</label><input id="f-website" placeholder="..."></div>
+        <div class="field" style="margin-top:4px;"><label style="display:flex; align-items:center; gap:6px; font-weight:500; cursor:pointer;"><input type="checkbox" id="f-hide-personal" style="width:auto;"> <span data-i18n="lblHideIntl">نمط دولي: إخفاء تاريخ الميلاد والجنسية من السيرة الذاتية</span></label></div>
+        <div class="field" style="margin-top:4px;"><label style="display:flex; align-items:center; gap:6px; font-weight:500; cursor:pointer;"><input type="checkbox" id="f-show-qr" style="width:auto;"> <span data-i18n="lblShowQr">إظهار رمز QR في السيرة الذاتية (يربط لِلينكدإن أو موقعك الشخصي)</span></label></div>
         </div>
       </div>
 
       <div class="section collapsed" data-section="jobtitle">
-        <div class="section-head"><h3>٢. المسمى الوظيفي المطلوب</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="sec2">٢. المسمى الوظيفي المطلوب</h3><span class="chevron">▾</span></div>
         <div class="section-body">
-        <div class="field"><label for="f-title">المسمى الذي تريد الظهور به</label><input id="f-title" placeholder="أخصائية تسويق رقمي"></div>
+        <div class="field"><label for="f-title" data-i18n="lblTitle">المسمى الذي تريد الظهور به</label><input id="f-title" placeholder="أخصائية تسويق رقمي"></div>
         </div>
       </div>
 
       <div class="section collapsed" data-section="summary">
-        <div class="section-head"><h3>نبذة مهنية (اختياري)</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="secSummary">نبذة مهنية (اختياري)</h3><span class="chevron">▾</span></div>
         <div class="section-body">
-        <div class="field"><label for="f-summary">سطر أو سطرين، أو اتركها فارغة</label>
+        <div class="field"><label for="f-summary" data-i18n="lblSummary">سطر أو سطرين، أو اتركها فارغة</label>
           <textarea id="f-summary" style="min-height:75px" placeholder="من أنت، وما الذي تحسنه، وما الذي تبحث عنه الآن."></textarea>
         </div>
         <div class="row-actions">
-          <button class="btn ai" id="summaryAiBtn">صياغة بالذكاء الاصطناعي</button>
+          <button class="btn ai" id="summaryAiBtn" data-i18n="aiPolishBtn">صياغة بالذكاء الاصطناعي</button>
           <span class="ai-status" id="summaryStatus"></span>
         </div>
         </div>
       </div>
 
       <div class="section collapsed" data-section="experience">
-        <div class="section-head"><h3>٣. الخبرات العملية</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="sec3">٣. الخبرات العملية</h3><span class="chevron">▾</span></div>
         <div class="section-body">
-        <div class="section-note">كرّر لكل وظيفة سابقة. يكفي كتابة أهم المهام كـ كلمات مفتاحية — الذكاء الاصطناعي يحوّلها إلى نقاط مهنية كاملة.</div>
+        <div class="section-note" data-i18n="sec3note">كرّر لكل وظيفة سابقة. يكفي كتابة أهم المهام كـ كلمات مفتاحية — الذكاء الاصطناعي يحوّلها إلى نقاط مهنية كاملة.</div>
         <div id="experienceList"></div>
-        <button class="btn add" id="addExperience">+ إضافة وظيفة</button>
+        <button class="btn add" id="addExperience" data-i18n="btnAddExp">+ إضافة وظيفة</button>
         </div>
       </div>
 
       <div class="section collapsed" data-section="education">
-        <div class="section-head"><h3>٤. التعليم</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="sec4">٤. التعليم</h3><span class="chevron">▾</span></div>
         <div class="section-body">
         <div id="educationList"></div>
-        <button class="btn add" id="addEducation">+ إضافة شهادة</button>
+        <button class="btn add" id="addEducation" data-i18n="btnAddEdu">+ إضافة شهادة</button>
         </div>
       </div>
 
       <div class="section collapsed" data-section="skills">
-        <div class="section-head"><h3>٥. المهارات</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="sec5">٥. المهارات</h3><span class="chevron">▾</span></div>
         <div class="section-body">
-        <div class="field"><label for="f-skills">مفصولة بفواصل</label><input id="f-skills" placeholder="إدارة مالية، إعداد الموازنات، التدقيق الداخلي"></div>
+        <div class="field"><label for="f-skills" data-i18n="lblSkills">مفصولة بفواصل</label><input id="f-skills" placeholder="إدارة مالية، إعداد الموازنات، التدقيق الداخلي"></div>
         </div>
       </div>
 
       <div class="section collapsed" data-section="languages">
-        <div class="section-head"><h3>٦. اللغات (اختياري)</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="sec6">٦. اللغات (اختياري)</h3><span class="chevron">▾</span></div>
         <div class="section-body">
-        <div class="field"><label for="f-languages">مفصولة بفواصل</label><input id="f-languages" placeholder="العربية (اللغة الأم)، الإنجليزية (متقدم)"></div>
+        <div class="field"><label for="f-languages" data-i18n="lblLanguages">مفصولة بفواصل</label><input id="f-languages" placeholder="العربية (اللغة الأم)، الإنجليزية (متقدم)"></div>
         </div>
       </div>
 
       <div class="section collapsed" data-section="hobbies">
-        <div class="section-head"><h3>٧. الهوايات والاهتمامات (اختياري)</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="sec7">٧. الهوايات والاهتمامات (اختياري)</h3><span class="chevron">▾</span></div>
         <div class="section-body">
-        <div class="field"><label for="f-hobbies">مفصولة بفواصل</label><input id="f-hobbies" placeholder="القراءة، السباحة، الشطرنج"></div>
+        <div class="field"><label for="f-hobbies" data-i18n="lblHobbies">مفصولة بفواصل</label><input id="f-hobbies" placeholder="القراءة، السباحة، الشطرنج"></div>
         </div>
       </div>
 
       <div class="section collapsed" data-section="additional">
-        <div class="section-head"><h3>٨. معلومات إضافية (اختياري)</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="sec8">٨. معلومات إضافية (اختياري)</h3><span class="chevron">▾</span></div>
         <div class="section-body">
-        <div class="field"><label for="f-additional">شهادات مهنية، عضويات، إنجازات...</label>
+        <div class="field"><label for="f-additional" data-i18n="lblAdditional">شهادات مهنية، عضويات، إنجازات...</label>
           <textarea id="f-additional" style="min-height:70px" placeholder="أي شيء آخر تراه مهماً."></textarea>
         </div>
         <div class="row-actions">
-          <button class="btn ai" id="additionalAiBtn">صياغة بالذكاء الاصطناعي</button>
+          <button class="btn ai" id="additionalAiBtn" data-i18n="aiPolishBtn">صياغة بالذكاء الاصطناعي</button>
           <span class="ai-status" id="additionalStatus"></span>
         </div>
         </div>
       </div>
 
       <div class="section collapsed" data-section="publications">
-        <div class="section-head"><h3>٩. منشورات علمية أو أبحاث (اختياري)</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="sec9">٩. منشورات علمية أو أبحاث (اختياري)</h3><span class="chevron">▾</span></div>
         <div class="section-body">
-        <div class="section-note">مناسب للسيرة الأكاديمية أو البحثية — سطر لكل بحث أو منشور يكفي.</div>
-        <div class="field"><label for="f-publications">أبحاث، منشورات، مؤتمرات...</label>
+        <div class="section-note" data-i18n="sec9note">مناسب للسيرة الأكاديمية أو البحثية — سطر لكل بحث أو منشور يكفي.</div>
+        <div class="field"><label for="f-publications" data-i18n="lblPublications">أبحاث، منشورات، مؤتمرات...</label>
           <textarea id="f-publications" style="min-height:70px" placeholder="اسم البحث، مكان النشر، السنة..."></textarea>
         </div>
         <div class="row-actions">
-          <button class="btn ai" id="publicationsAiBtn">صياغة بالذكاء الاصطناعي</button>
+          <button class="btn ai" id="publicationsAiBtn" data-i18n="aiPolishBtn">صياغة بالذكاء الاصطناعي</button>
           <span class="ai-status" id="publicationsStatus"></span>
         </div>
         </div>
       </div>
 
       <div class="section collapsed" data-section="ats">
-        <div class="section-head"><h3>١٠. مطابقة الوظيفة (ATS)</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="sec10">١٠. مطابقة الوظيفة (ATS)</h3><span class="chevron">▾</span></div>
         <div class="section-body">
-          <div class="section-note">الصق وصف الوظيفة، واحصل على نسبة توافق مع سيرتك الحالية واقتراحات كلمات ناقصة. لا يؤثّر على السيرة المطبوعة، أداة مساعدة فقط.</div>
-          <div class="field"><label for="f-ats-jd">وصف الوظيفة</label><textarea id="f-ats-jd" style="min-height:100px" placeholder="ألصق نص إعلان الوظيفة هنا..."></textarea></div>
-          <div class="row-actions"><button class="btn ai" id="atsRunBtn">احسب نسبة التوافق</button><span class="ai-status" id="atsStatus"></span></div>
+          <div class="section-note" data-i18n="sec10note">الصق وصف الوظيفة، واحصل على نسبة توافق مع سيرتك الحالية واقتراحات كلمات ناقصة. لا يؤثّر على السيرة المطبوعة، أداة مساعدة فقط.</div>
+          <div class="field"><label for="f-ats-jd" data-i18n="lblAtsJd">وصف الوظيفة</label><textarea id="f-ats-jd" style="min-height:100px" placeholder="ألصق نص إعلان الوظيفة هنا..."></textarea></div>
+          <div class="row-actions"><button class="btn ai" id="atsRunBtn" data-i18n="btnAtsRun">احسب نسبة التوافق</button><span class="ai-status" id="atsStatus"></span></div>
           <div id="atsResult" style="display:none; margin-top:12px;">
             <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
               <div class="progress-track" style="flex:1;"><div class="progress-fill" id="atsScoreFill" style="width:0%"></div></div>
@@ -368,19 +368,19 @@
       </div>
 
       <div class="section collapsed" data-section="letter">
-        <div class="section-head"><h3>خطاب التقديم</h3><span class="chevron">▾</span></div>
+        <div class="section-head"><h3 data-i18n="secLetter">خطاب التقديم</h3><span class="chevron">▾</span></div>
         <div class="section-body">
         <div class="field-row">
-          <div class="field"><label for="f-letter-company">الشركة</label><input id="f-letter-company" placeholder="اسم الشركة"></div>
-          <div class="field"><label for="f-letter-role">الوظيفة المتقدَّم لها</label><input id="f-letter-role" placeholder="مديرة تسويق"></div>
+          <div class="field"><label for="f-letter-company" data-i18n="lblLetterCompany">الشركة</label><input id="f-letter-company" placeholder="اسم الشركة"></div>
+          <div class="field"><label for="f-letter-role" data-i18n="lblLetterRole">الوظيفة المتقدَّم لها</label><input id="f-letter-role" placeholder="مديرة تسويق"></div>
         </div>
-        <div class="field"><label for="f-letter-recipient">اسم المسؤول عن التوظيف (اختياري)</label><input id="f-letter-recipient" placeholder="اتركه فارغاً لكتابة «فريق التوظيف»"></div>
-        <div class="field"><label for="f-letter-notes">ملاحظات: نص الوظيفة أو سبب رغبتك بها</label><textarea id="f-letter-notes" style="min-height:70px" placeholder="ألصق نص الإعلان الوظيفي، أو اكتب سبب اهتمامك."></textarea></div>
+        <div class="field"><label for="f-letter-recipient" data-i18n="lblLetterRecipient">اسم المسؤول عن التوظيف (اختياري)</label><input id="f-letter-recipient" placeholder="اتركه فارغاً لكتابة «فريق التوظيف»"></div>
+        <div class="field"><label for="f-letter-notes" data-i18n="lblLetterNotes">ملاحظات: نص الوظيفة أو سبب رغبتك بها</label><textarea id="f-letter-notes" style="min-height:70px" placeholder="ألصق نص الإعلان الوظيفي، أو اكتب سبب اهتمامك."></textarea></div>
         <div class="row-actions">
-          <button class="btn ai" id="letterAiBtn">صياغة بالذكاء الاصطناعي</button>
+          <button class="btn ai" id="letterAiBtn" data-i18n="aiPolishBtn">صياغة بالذكاء الاصطناعي</button>
           <span class="ai-status" id="letterStatus"></span>
         </div>
-        <div class="field" style="margin-top:10px;"><label for="f-letter-body">نص الخطاب (قابل للتحرير، اترك سطراً فارغاً بين الفقرات)</label>
+        <div class="field" style="margin-top:10px;"><label for="f-letter-body" data-i18n="lblLetterBody">نص الخطاب (قابل للتحرير، اترك سطراً فارغاً بين الفقرات)</label>
           <textarea id="f-letter-body" style="min-height:170px" placeholder="اكتب نص الخطاب هنا أو دع الذكاء الاصطناعي يبدأه."></textarea>
         </div>
         </div>
@@ -413,11 +413,11 @@
       </div>
       <div class="toolbar">
         <div class="tabs" id="tabsWrap">
-          <button class="tab-btn active" data-tab="resume" id="tabResume">السيرة الذاتية</button>
-          <button class="tab-btn" data-tab="letter" id="tabLetter">خطاب التقديم</button>
+          <button class="tab-btn active" data-tab="resume" id="tabResume" data-i18n="tabResume">السيرة الذاتية</button>
+          <button class="tab-btn" data-tab="letter" id="tabLetter" data-i18n="tabLetter">خطاب التقديم</button>
         </div>
         <div class="toolbar-right">
-          <label class="combine-check"><input type="checkbox" id="combineCheck"> دمج الملفين في PDF واحد</label>
+          <label class="combine-check"><input type="checkbox" id="combineCheck"> <span data-i18n="combineLabel">دمج الملفين في PDF واحد</span></label>
           <button class="btn download" id="downloadBtn">تحميل PDF للسيرة الذاتية</button>
         </div>
       </div>
@@ -485,6 +485,26 @@
   };
   const LOCALE_MAP = { ar:'ar', en:'en-US', es:'es-ES', fr:'fr-FR', it:'it-IT', ru:'ru-RU', zh:'zh-CN' };
   const LANG_NAMES_AR = { en:'الإنجليزية', es:'الإسبانية', fr:'الفرنسية', it:'الإيطالية', ru:'الروسية', zh:'الصينية' };
+
+  const UI_I18N = {"ar": {"appTitle": "مكتب الصياغة", "appSubtitle": "عبّئ المعلومات في النموذج الاسترشادي على اليمين، أو ألصق ملاحظات سريعة في مربع البداية السريعة ليقوم الذكاء الاصطناعي بصياغة أول نسخة. يمكنك أيضاً عرض السيرة الذاتية وخطاب التقديم بلغات متعددة من أعلى المعاينة.", "qsTag": "بداية سريعة", "qsTitle": "صياغة كل شيء دفعة واحدة", "qsDesc": "ألصق خبرتك بشكل حر، أو سيرة ذاتية قديمة، أو حتى إعلان الوظيفة التي تتقدم لها. سيقوم المكتب بصياغة أول نسخة كاملة أدناه، وتستطيع تنقيحها بعد ذلك.", "qsPlaceholder": "مثال: اسمي سارة، عملت أخصائية تسويق في شركة اتصالات من 2018 إلى 2021 في الرياض، ثم محللة بيانات في شركة تجزئة بدبي من 2021 إلى 2024، أتقدم الآن لوظيفة مدير تسويق في شركة...", "qsBtn": "ابدأ الصياغة", "sec1": "١. المعلومات الشخصية", "sec2": "٢. المسمى الوظيفي المطلوب", "sec3": "٣. الخبرات العملية", "sec3note": "كرّر لكل وظيفة سابقة. يكفي كتابة أهم المهام كـ كلمات مفتاحية — الذكاء الاصطناعي يحوّلها إلى نقاط مهنية كاملة.", "sec4": "٤. التعليم", "sec5": "٥. المهارات", "sec6": "٦. اللغات (اختياري)", "sec7": "٧. الهوايات والاهتمامات (اختياري)", "sec8": "٨. معلومات إضافية (اختياري)", "sec9": "٩. منشورات علمية أو أبحاث (اختياري)", "sec9note": "مناسب للسيرة الأكاديمية أو البحثية — سطر لكل بحث أو منشور يكفي.", "sec10": "١٠. مطابقة الوظيفة (ATS)", "sec10note": "الصق وصف الوظيفة، واحصل على نسبة توافق مع سيرتك الحالية واقتراحات كلمات ناقصة. لا يؤثّر على السيرة المطبوعة، أداة مساعدة فقط.", "secLetter": "خطاب التقديم", "secSummary": "نبذة مهنية (اختياري)", "lblName": "الاسم الكامل", "lblPhotoNote": "لن تظهر الصورة إن فعّلت «النمط الدولي» أدناه — أغلب الشركات الأمريكية والأوروبية لا تفضّل الصور في السيرة الذاتية.", "lblBirthdate": "تاريخ الميلاد", "lblNationality": "الجنسية (اختياري)", "lblPhone": "رقم الهاتف", "lblEmail": "البريد الإلكتروني", "lblLocation": "مكان الإقامة", "lblLinkedin": "لينكدإن (اختياري)", "lblWebsite": "موقع شخصي (اختياري)", "lblHideIntl": "نمط دولي: إخفاء تاريخ الميلاد والجنسية من السيرة الذاتية", "lblShowQr": "إظهار رمز QR في السيرة الذاتية (يربط لِلينكدإن أو موقعك الشخصي)", "lblTitle": "المسمى الذي تريد الظهور به", "lblSummary": "سطر أو سطرين، أو اتركها فارغة", "lblSkills": "مفصولة بفواصل", "lblLanguages": "مفصولة بفواصل", "lblHobbies": "مفصولة بفواصل", "lblAdditional": "شهادات مهنية، عضويات، إنجازات...", "lblPublications": "أبحاث، منشورات، مؤتمرات...", "lblAtsJd": "وصف الوظيفة", "lblLetterCompany": "الشركة", "lblLetterRole": "الوظيفة المتقدَّم لها", "lblLetterRecipient": "اسم المسؤول عن التوظيف (اختياري)", "lblLetterNotes": "ملاحظات: نص الوظيفة أو سبب رغبتك بها", "lblLetterBody": "نص الخطاب (قابل للتحرير، اترك سطراً فارغاً بين الفقرات)", "btnAddExp": "+ إضافة وظيفة", "btnAddEdu": "+ إضافة شهادة", "btnAtsRun": "احسب نسبة التوافق", "aiPolishBtn": "صياغة بالذكاء الاصطناعي", "tabResume": "السيرة الذاتية", "tabLetter": "خطاب التقديم", "combineLabel": "دمج الملفين في PDF واحد", "authSendCode": "إرسال رمز التفعيل", "authVerify": "تأكيد الرمز", "authLogout": "تسجيل الخروج", "authEmailPh": "بريدك الإلكتروني لحفظ بياناتك", "entryRole": "المسمى الوظيفي", "entryCompany": "اسم الشركة", "entryLocation": "الموقع", "entryDates": "التواريخ", "entryTasks": "أهم المهام (كلمات مفتاحية تكفي)", "entryRemove": "حذف", "entryJobPrefix": "الوظيفة", "entryDegree": "الشهادة", "entrySchool": "الجامعة", "entryDetail": "تفاصيل إضافية (اختياري)", "entryCertPrefix": "الشهادة"}, "en": {"appTitle": "The Drafting Desk", "appSubtitle": "Fill in the guided form on the right, or paste quick notes in the quick-start box and let AI draft a first version. You can also view the resume and cover letter in several languages from the top of the preview.", "qsTag": "Quick start", "qsTitle": "Draft everything at once", "qsDesc": "Paste your experience freely, an old resume, or even the job posting you're applying to. The desk will draft a full first version below, which you can refine afterwards.", "qsPlaceholder": "Example: My name is Sara, I worked as a marketing specialist at a telecom company from 2018 to 2021 in Riyadh, then as a data analyst at a retail company in Dubai from 2021 to 2024, and I'm now applying for a marketing manager role at...", "qsBtn": "Start drafting", "sec1": "1. Personal Information", "sec2": "2. Target Job Title", "sec3": "3. Work Experience", "sec3note": "Repeat for each previous job. Just jot down the main tasks as keywords — AI will turn them into full professional bullet points.", "sec4": "4. Education", "sec5": "5. Skills", "sec6": "6. Languages (optional)", "sec7": "7. Hobbies & Interests (optional)", "sec8": "8. Additional Information (optional)", "sec9": "9. Publications or Research (optional)", "sec9note": "Suited for an academic or research CV — one line per paper or publication is enough.", "sec10": "10. Job Match (ATS)", "sec10note": "Paste the job description to get a match score against your current resume and suggested missing keywords. Doesn't affect the printed resume, it's just a helper tool.", "secLetter": "Cover Letter", "secSummary": "Professional Summary (optional)", "lblName": "Full name", "lblPhotoNote": "The photo won't appear if you enable \"International style\" below — most US and European companies don't prefer photos on a resume.", "lblBirthdate": "Date of birth", "lblNationality": "Nationality (optional)", "lblPhone": "Phone number", "lblEmail": "Email", "lblLocation": "Location", "lblLinkedin": "LinkedIn (optional)", "lblWebsite": "Personal website (optional)", "lblHideIntl": "International style: hide date of birth and nationality from the resume", "lblShowQr": "Show a QR code on the resume (links to LinkedIn or your personal site)", "lblTitle": "The title you want to appear with", "lblSummary": "A line or two, or leave it blank", "lblSkills": "Comma separated", "lblLanguages": "Comma separated", "lblHobbies": "Comma separated", "lblAdditional": "Certifications, memberships, achievements...", "lblPublications": "Papers, publications, conferences...", "lblAtsJd": "Job description", "lblLetterCompany": "Company", "lblLetterRole": "Role you're applying for", "lblLetterRecipient": "Hiring manager's name (optional)", "lblLetterNotes": "Notes: the job posting or why you want it", "lblLetterBody": "Letter body (editable, leave a blank line between paragraphs)", "btnAddExp": "+ Add a job", "btnAddEdu": "+ Add a degree", "btnAtsRun": "Calculate match score", "aiPolishBtn": "Polish with AI", "tabResume": "Resume", "tabLetter": "Cover Letter", "combineLabel": "Combine both into one PDF", "authSendCode": "Send activation code", "authVerify": "Confirm code", "authLogout": "Log out", "authEmailPh": "Your email to save your data", "entryRole": "Role", "entryCompany": "Company name", "entryLocation": "Location", "entryDates": "Dates", "entryTasks": "Main tasks (keywords are enough)", "entryRemove": "Remove", "entryJobPrefix": "Job", "entryDegree": "Degree", "entrySchool": "School", "entryDetail": "Additional detail (optional)", "entryCertPrefix": "Degree"}, "es": {"appTitle": "El Escritorio de Redacción", "appSubtitle": "Completa el formulario guiado a la derecha, o pega notas rápidas en el cuadro de inicio rápido y deja que la IA redacte una primera versión. También puedes ver el currículum y la carta de presentación en varios idiomas desde arriba de la vista previa.", "qsTag": "Inicio rápido", "qsTitle": "Redactar todo de una vez", "qsDesc": "Pega tu experiencia libremente, un currículum antiguo, o incluso la oferta de empleo a la que aplicas. El escritorio redactará una primera versión completa abajo, que podrás refinar después.", "qsPlaceholder": "Ejemplo: Me llamo Sara, trabajé como especialista en marketing en una empresa de telecomunicaciones de 2018 a 2021 en Riad, luego como analista de datos en una empresa minorista en Dubái de 2021 a 2024, y ahora solicito un puesto de gerente de marketing en...", "qsBtn": "Empezar a redactar", "sec1": "1. Información personal", "sec2": "2. Puesto objetivo", "sec3": "3. Experiencia laboral", "sec3note": "Repite para cada empleo anterior. Basta con anotar las tareas principales como palabras clave — la IA las convertirá en viñetas profesionales completas.", "sec4": "4. Educación", "sec5": "5. Habilidades", "sec6": "6. Idiomas (opcional)", "sec7": "7. Aficiones e intereses (opcional)", "sec8": "8. Información adicional (opcional)", "sec9": "9. Publicaciones o investigación (opcional)", "sec9note": "Adecuado para un currículum académico o de investigación — una línea por artículo o publicación es suficiente.", "sec10": "10. Compatibilidad con la oferta (ATS)", "sec10note": "Pega la descripción del puesto para obtener una puntuación de compatibilidad con tu currículum actual y sugerencias de palabras clave faltantes. No afecta al currículum impreso, es solo una herramienta de ayuda.", "secLetter": "Carta de presentación", "secSummary": "Resumen profesional (opcional)", "lblName": "Nombre completo", "lblPhotoNote": "La foto no aparecerá si activas el «estilo internacional» abajo — la mayoría de empresas de EE. UU. y Europa no prefieren fotos en el currículum.", "lblBirthdate": "Fecha de nacimiento", "lblNationality": "Nacionalidad (opcional)", "lblPhone": "Teléfono", "lblEmail": "Correo electrónico", "lblLocation": "Ubicación", "lblLinkedin": "LinkedIn (opcional)", "lblWebsite": "Sitio web personal (opcional)", "lblHideIntl": "Estilo internacional: ocultar fecha de nacimiento y nacionalidad del currículum", "lblShowQr": "Mostrar un código QR en el currículum (enlaza a LinkedIn o tu sitio personal)", "lblTitle": "El título con el que quieres aparecer", "lblSummary": "Una o dos líneas, o déjalo en blanco", "lblSkills": "Separadas por comas", "lblLanguages": "Separados por comas", "lblHobbies": "Separados por comas", "lblAdditional": "Certificaciones, membresías, logros...", "lblPublications": "Artículos, publicaciones, conferencias...", "lblAtsJd": "Descripción del puesto", "lblLetterCompany": "Empresa", "lblLetterRole": "Puesto al que aplicas", "lblLetterRecipient": "Nombre del responsable de contratación (opcional)", "lblLetterNotes": "Notas: la oferta de empleo o por qué la quieres", "lblLetterBody": "Cuerpo de la carta (editable, deja una línea en blanco entre párrafos)", "btnAddExp": "+ Añadir empleo", "btnAddEdu": "+ Añadir título", "btnAtsRun": "Calcular compatibilidad", "aiPolishBtn": "Pulir con IA", "tabResume": "Currículum", "tabLetter": "Carta de presentación", "combineLabel": "Combinar ambos en un solo PDF", "authSendCode": "Enviar código de activación", "authVerify": "Confirmar código", "authLogout": "Cerrar sesión", "authEmailPh": "Tu correo para guardar tus datos", "entryRole": "Puesto", "entryCompany": "Nombre de la empresa", "entryLocation": "Ubicación", "entryDates": "Fechas", "entryTasks": "Tareas principales (palabras clave bastan)", "entryRemove": "Eliminar", "entryJobPrefix": "Empleo", "entryDegree": "Título", "entrySchool": "Universidad", "entryDetail": "Detalle adicional (opcional)", "entryCertPrefix": "Título"}, "fr": {"appTitle": "Le Bureau de Rédaction", "appSubtitle": "Remplissez le formulaire guidé à droite, ou collez des notes rapides dans la case de démarrage rapide pour laisser l'IA rédiger une première version. Vous pouvez aussi afficher le CV et la lettre de motivation en plusieurs langues en haut de l'aperçu.", "qsTag": "Démarrage rapide", "qsTitle": "Tout rédiger en une fois", "qsDesc": "Collez votre expérience librement, un ancien CV, ou même l'offre d'emploi visée. Le bureau rédigera une première version complète ci-dessous, que vous pourrez affiner ensuite.", "qsPlaceholder": "Exemple : Je m'appelle Sara, j'ai travaillé comme spécialiste marketing dans une entreprise de télécommunications de 2018 à 2021 à Riyad, puis comme analyste de données dans une entreprise de vente au détail à Dubaï de 2021 à 2024, et je postule maintenant pour un poste de responsable marketing chez...", "qsBtn": "Commencer la rédaction", "sec1": "1. Informations personnelles", "sec2": "2. Intitulé de poste visé", "sec3": "3. Expérience professionnelle", "sec3note": "Répétez pour chaque poste précédent. Il suffit de noter les tâches principales sous forme de mots-clés — l'IA les transformera en points professionnels complets.", "sec4": "4. Formation", "sec5": "5. Compétences", "sec6": "6. Langues (facultatif)", "sec7": "7. Loisirs et centres d'intérêt (facultatif)", "sec8": "8. Informations complémentaires (facultatif)", "sec9": "9. Publications ou recherche (facultatif)", "sec9note": "Adapté à un CV académique ou de recherche — une ligne par article ou publication suffit.", "sec10": "10. Compatibilité avec l'offre (ATS)", "sec10note": "Collez la description du poste pour obtenir un score de compatibilité avec votre CV actuel et des suggestions de mots-clés manquants. N'affecte pas le CV imprimé, c'est un simple outil d'aide.", "secLetter": "Lettre de motivation", "secSummary": "Résumé professionnel (facultatif)", "lblName": "Nom complet", "lblPhotoNote": "La photo n'apparaîtra pas si vous activez le « style international » ci-dessous — la plupart des entreprises américaines et européennes ne préfèrent pas de photo sur un CV.", "lblBirthdate": "Date de naissance", "lblNationality": "Nationalité (facultatif)", "lblPhone": "Téléphone", "lblEmail": "E-mail", "lblLocation": "Localisation", "lblLinkedin": "LinkedIn (facultatif)", "lblWebsite": "Site personnel (facultatif)", "lblHideIntl": "Style international : masquer la date de naissance et la nationalité du CV", "lblShowQr": "Afficher un code QR sur le CV (renvoie vers LinkedIn ou votre site personnel)", "lblTitle": "Le titre sous lequel vous voulez apparaître", "lblSummary": "Une ou deux lignes, ou laissez vide", "lblSkills": "Séparées par des virgules", "lblLanguages": "Séparées par des virgules", "lblHobbies": "Séparés par des virgules", "lblAdditional": "Certifications, adhésions, réalisations...", "lblPublications": "Articles, publications, conférences...", "lblAtsJd": "Description du poste", "lblLetterCompany": "Entreprise", "lblLetterRole": "Poste visé", "lblLetterRecipient": "Nom du recruteur (facultatif)", "lblLetterNotes": "Notes : l'offre d'emploi ou pourquoi vous la voulez", "lblLetterBody": "Corps de la lettre (modifiable, laissez une ligne vide entre les paragraphes)", "btnAddExp": "+ Ajouter un poste", "btnAddEdu": "+ Ajouter un diplôme", "btnAtsRun": "Calculer la compatibilité", "aiPolishBtn": "Peaufiner avec l'IA", "tabResume": "CV", "tabLetter": "Lettre de motivation", "combineLabel": "Combiner les deux en un seul PDF", "authSendCode": "Envoyer le code d'activation", "authVerify": "Confirmer le code", "authLogout": "Se déconnecter", "authEmailPh": "Votre e-mail pour sauvegarder vos données", "entryRole": "Poste", "entryCompany": "Nom de l'entreprise", "entryLocation": "Lieu", "entryDates": "Dates", "entryTasks": "Tâches principales (mots-clés suffisent)", "entryRemove": "Supprimer", "entryJobPrefix": "Poste", "entryDegree": "Diplôme", "entrySchool": "Université", "entryDetail": "Détail supplémentaire (facultatif)", "entryCertPrefix": "Diplôme"}, "it": {"appTitle": "La Scrivania di Redazione", "appSubtitle": "Compila il modulo guidato a destra, oppure incolla note rapide nella casella di avvio rapido e lascia che l'IA scriva una prima versione. Puoi anche visualizzare il CV e la lettera di presentazione in diverse lingue dall'alto dell'anteprima.", "qsTag": "Avvio rapido", "qsTitle": "Scrivere tutto in una volta", "qsDesc": "Incolla la tua esperienza liberamente, un vecchio CV, o anche l'annuncio di lavoro a cui ti candidi. La scrivania scriverà una prima versione completa qui sotto, che potrai perfezionare in seguito.", "qsPlaceholder": "Esempio: Mi chiamo Sara, ho lavorato come specialista di marketing in un'azienda di telecomunicazioni dal 2018 al 2021 a Riyadh, poi come analista dati in un'azienda retail a Dubai dal 2021 al 2024, e ora mi candido per un ruolo di marketing manager presso...", "qsBtn": "Inizia a scrivere", "sec1": "1. Informazioni personali", "sec2": "2. Ruolo desiderato", "sec3": "3. Esperienza lavorativa", "sec3note": "Ripeti per ogni lavoro precedente. Basta annotare i compiti principali come parole chiave — l'IA le trasformerà in punti professionali completi.", "sec4": "4. Istruzione", "sec5": "5. Competenze", "sec6": "6. Lingue (opzionale)", "sec7": "7. Interessi e hobby (opzionale)", "sec8": "8. Informazioni aggiuntive (opzionale)", "sec9": "9. Pubblicazioni o ricerca (opzionale)", "sec9note": "Adatto a un CV accademico o di ricerca — una riga per articolo o pubblicazione è sufficiente.", "sec10": "10. Compatibilità con l'offerta (ATS)", "sec10note": "Incolla la descrizione del lavoro per ottenere un punteggio di compatibilità con il tuo CV attuale e suggerimenti di parole chiave mancanti. Non influisce sul CV stampato, è solo uno strumento di supporto.", "secLetter": "Lettera di presentazione", "secSummary": "Riepilogo professionale (opzionale)", "lblName": "Nome completo", "lblPhotoNote": "La foto non apparirà se attivi lo «stile internazionale» sotto — la maggior parte delle aziende statunitensi ed europee non preferisce foto nel CV.", "lblBirthdate": "Data di nascita", "lblNationality": "Nazionalità (opzionale)", "lblPhone": "Telefono", "lblEmail": "Email", "lblLocation": "Posizione", "lblLinkedin": "LinkedIn (opzionale)", "lblWebsite": "Sito personale (opzionale)", "lblHideIntl": "Stile internazionale: nascondi data di nascita e nazionalità dal CV", "lblShowQr": "Mostra un codice QR sul CV (collega a LinkedIn o al tuo sito personale)", "lblTitle": "Il titolo con cui vuoi apparire", "lblSummary": "Una o due righe, oppure lascia vuoto", "lblSkills": "Separate da virgole", "lblLanguages": "Separate da virgole", "lblHobbies": "Separati da virgole", "lblAdditional": "Certificazioni, iscrizioni, risultati...", "lblPublications": "Articoli, pubblicazioni, conferenze...", "lblAtsJd": "Descrizione del lavoro", "lblLetterCompany": "Azienda", "lblLetterRole": "Ruolo per cui ti candidi", "lblLetterRecipient": "Nome del responsabile assunzioni (opzionale)", "lblLetterNotes": "Note: l'annuncio di lavoro o perché lo vuoi", "lblLetterBody": "Corpo della lettera (modificabile, lascia una riga vuota tra i paragrafi)", "btnAddExp": "+ Aggiungi un lavoro", "btnAddEdu": "+ Aggiungi un titolo", "btnAtsRun": "Calcola compatibilità", "aiPolishBtn": "Perfeziona con l'IA", "tabResume": "Curriculum", "tabLetter": "Lettera di presentazione", "combineLabel": "Unisci entrambi in un unico PDF", "authSendCode": "Invia codice di attivazione", "authVerify": "Conferma codice", "authLogout": "Esci", "authEmailPh": "La tua email per salvare i tuoi dati", "entryRole": "Ruolo", "entryCompany": "Nome dell'azienda", "entryLocation": "Luogo", "entryDates": "Date", "entryTasks": "Compiti principali (bastano parole chiave)", "entryRemove": "Rimuovi", "entryJobPrefix": "Lavoro", "entryDegree": "Laurea", "entrySchool": "Università", "entryDetail": "Dettaglio aggiuntivo (opzionale)", "entryCertPrefix": "Laurea"}, "ru": {"appTitle": "Стол Составления", "appSubtitle": "Заполните форму справа или вставьте краткие заметки в поле быстрого старта, чтобы ИИ составил первую версию. Резюме и сопроводительное письмо можно также просмотреть на нескольких языках сверху предпросмотра.", "qsTag": "Быстрый старт", "qsTitle": "Составить всё сразу", "qsDesc": "Вставьте свой опыт в свободной форме, старое резюме или даже вакансию, на которую откликаетесь. Стол составит полную первую версию ниже, которую вы сможете доработать позже.", "qsPlaceholder": "Пример: Меня зовут Сара, я работала специалистом по маркетингу в телекоммуникационной компании с 2018 по 2021 год в Эр-Рияде, затем аналитиком данных в розничной компании в Дубае с 2021 по 2024 год, и сейчас подаю заявку на должность менеджера по маркетингу в...", "qsBtn": "Начать составление", "sec1": "1. Личная информация", "sec2": "2. Желаемая должность", "sec3": "3. Опыт работы", "sec3note": "Повторите для каждой предыдущей должности. Достаточно записать основные задачи ключевыми словами — ИИ превратит их в полноценные профессиональные пункты.", "sec4": "4. Образование", "sec5": "5. Навыки", "sec6": "6. Языки (необязательно)", "sec7": "7. Хобби и интересы (необязательно)", "sec8": "8. Дополнительная информация (необязательно)", "sec9": "9. Публикации или исследования (необязательно)", "sec9note": "Подходит для академического или исследовательского резюме — достаточно одной строки на статью или публикацию.", "sec10": "10. Соответствие вакансии (ATS)", "sec10note": "Вставьте описание вакансии, чтобы получить оценку соответствия вашему текущему резюме и предложения недостающих ключевых слов. Не влияет на печатное резюме, это просто вспомогательный инструмент.", "secLetter": "Сопроводительное письмо", "secSummary": "Профессиональное резюме (необязательно)", "lblName": "Полное имя", "lblPhotoNote": "Фото не появится, если вы включите «международный стиль» ниже — большинство американских и европейских компаний не предпочитают фото в резюме.", "lblBirthdate": "Дата рождения", "lblNationality": "Национальность (необязательно)", "lblPhone": "Телефон", "lblEmail": "Электронная почта", "lblLocation": "Местоположение", "lblLinkedin": "LinkedIn (необязательно)", "lblWebsite": "Личный сайт (необязательно)", "lblHideIntl": "Международный стиль: скрыть дату рождения и национальность из резюме", "lblShowQr": "Показать QR-код в резюме (ссылка на LinkedIn или личный сайт)", "lblTitle": "Название должности, с которым вы хотите отображаться", "lblSummary": "Одна-две строки или оставьте пустым", "lblSkills": "Через запятую", "lblLanguages": "Через запятую", "lblHobbies": "Через запятую", "lblAdditional": "Сертификаты, membership, достижения...", "lblPublications": "Статьи, публикации, конференции...", "lblAtsJd": "Описание вакансии", "lblLetterCompany": "Компания", "lblLetterRole": "Должность, на которую откликаетесь", "lblLetterRecipient": "Имя менеджера по найму (необязательно)", "lblLetterNotes": "Заметки: вакансия или почему вы хотите её получить", "lblLetterBody": "Текст письма (редактируемый, оставьте пустую строку между абзацами)", "btnAddExp": "+ Добавить работу", "btnAddEdu": "+ Добавить образование", "btnAtsRun": "Рассчитать соответствие", "aiPolishBtn": "Улучшить с ИИ", "tabResume": "Резюме", "tabLetter": "Сопроводительное письмо", "combineLabel": "Объединить оба в один PDF", "authSendCode": "Отправить код активации", "authVerify": "Подтвердить код", "authLogout": "Выйти", "authEmailPh": "Ваша почта для сохранения данных", "entryRole": "Должность", "entryCompany": "Название компании", "entryLocation": "Местоположение", "entryDates": "Даты", "entryTasks": "Основные задачи (достаточно ключевых слов)", "entryRemove": "Удалить", "entryJobPrefix": "Работа", "entryDegree": "Степень", "entrySchool": "Университет", "entryDetail": "Дополнительная информация (необязательно)", "entryCertPrefix": "Степень"}, "zh": {"appTitle": "撰写台", "appSubtitle": "在右侧填写引导表单，或在快速开始框中粘贴简短笔记，让AI起草第一版。您也可以在预览区上方以多种语言查看简历和求职信。", "qsTag": "快速开始", "qsTitle": "一次性起草全部内容", "qsDesc": "自由粘贴您的经历、旧简历，甚至您申请的职位描述。撰写台将在下方起草完整的第一版，之后您可以进行修改。", "qsPlaceholder": "示例：我叫Sara，2018年至2021年在利雅得一家电信公司担任市场专员，随后2021年至2024年在迪拜一家零售公司担任数据分析师，现申请该公司市场经理职位……", "qsBtn": "开始起草", "sec1": "1. 个人信息", "sec2": "2. 目标职位", "sec3": "3. 工作经历", "sec3note": "每份工作重复此步骤。只需用关键词记录主要职责——AI会将其转化为完整的专业条目。", "sec4": "4. 教育背景", "sec5": "5. 技能", "sec6": "6. 语言（可选）", "sec7": "7. 兴趣爱好（可选）", "sec8": "8. 补充信息（可选）", "sec9": "9. 论文或研究成果（可选）", "sec9note": "适合学术或研究型简历——每篇论文或成果一行即可。", "sec10": "10. 职位匹配度（ATS）", "sec10note": "粘贴职位描述，即可获得与您当前简历的匹配度评分及缺失关键词建议。不影响打印版简历，仅为辅助工具。", "secLetter": "求职信", "secSummary": "个人简介（可选）", "lblName": "姓名", "lblPhotoNote": "启用下方“国际风格”后照片将不显示——大多数美欧公司不倾向于在简历中放照片。", "lblBirthdate": "出生日期", "lblNationality": "国籍（可选）", "lblPhone": "电话号码", "lblEmail": "电子邮箱", "lblLocation": "所在地", "lblLinkedin": "领英LinkedIn（可选）", "lblWebsite": "个人网站（可选）", "lblHideIntl": "国际风格：在简历中隐藏出生日期和国籍", "lblShowQr": "在简历中显示二维码（链接至LinkedIn或个人网站）", "lblTitle": "您希望显示的职位名称", "lblSummary": "一两行即可，或留空", "lblSkills": "用逗号分隔", "lblLanguages": "用逗号分隔", "lblHobbies": "用逗号分隔", "lblAdditional": "专业证书、会员资格、成就……", "lblPublications": "论文、出版物、会议……", "lblAtsJd": "职位描述", "lblLetterCompany": "公司", "lblLetterRole": "申请的职位", "lblLetterRecipient": "招聘负责人姓名（可选）", "lblLetterNotes": "备注：职位描述或您想申请的原因", "lblLetterBody": "信函正文（可编辑，段落之间留一空行）", "btnAddExp": "+ 添加工作经历", "btnAddEdu": "+ 添加学历", "btnAtsRun": "计算匹配度", "aiPolishBtn": "用AI润色", "tabResume": "简历", "tabLetter": "求职信", "combineLabel": "合并为一个PDF", "authSendCode": "发送激活码", "authVerify": "确认验证码", "authLogout": "退出登录", "authEmailPh": "您的邮箱，用于保存数据", "entryRole": "职位", "entryCompany": "公司名称", "entryLocation": "地点", "entryDates": "日期", "entryTasks": "主要职责（关键词即可）", "entryRemove": "删除", "entryJobPrefix": "工作", "entryDegree": "学位", "entrySchool": "学校", "entryDetail": "补充说明（可选）", "entryCertPrefix": "学位"}};
+
+  let uiLang = 'ar';
+  function applyUILang(lang){
+    uiLang = lang;
+    const t = UI_I18N[lang] || UI_I18N.ar;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      const k = el.getAttribute('data-i18n');
+      if (t[k] != null) el.textContent = t[k];
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      const k = el.getAttribute('data-i18n-ph');
+      if (t[k] != null) el.setAttribute('placeholder', t[k]);
+    });
+    const deskDir = dirOf(lang);
+    document.getElementById('desk').setAttribute('dir', deskDir);
+    document.querySelector('.app-header').setAttribute('dir', deskDir);
+    renderExperienceForm(); renderEducationForm();
+  }
 
   function dirOf(lang){ return lang === 'ar' ? 'rtl' : 'ltr'; }
 
@@ -976,13 +996,13 @@
     if (lang === previewLang) return;
     const statusEl = document.getElementById('langStatus');
     if (lang === 'ar' || state.translations[lang]){
-      previewLang = lang; setActiveLangBtn(lang); scheduleLayout(); setStatus(statusEl, ''); return;
+      previewLang = lang; setActiveLangBtn(lang); applyUILang(lang); scheduleLayout(); setStatus(statusEl, ''); return;
     }
     setStatus(statusEl, "جارٍ الترجمة…");
     document.querySelectorAll('.lang-btn').forEach(function(b){ b.disabled = true; });
     try {
       await translateAll(lang);
-      previewLang = lang; setActiveLangBtn(lang); scheduleLayout(); setStatus(statusEl, '');
+      previewLang = lang; setActiveLangBtn(lang); applyUILang(lang); scheduleLayout(); setStatus(statusEl, '');
     } catch(err){ setStatus(statusEl, "تعذّرت الترجمة: " + (err && err.message ? err.message : "خطأ غير معروف"), true); }
     document.querySelectorAll('.lang-btn').forEach(function(b){ b.disabled = false; });
   });
@@ -1087,24 +1107,25 @@
   // ---------- Experience form ----------
   const experienceList = document.getElementById('experienceList');
   function renderExperienceForm(){
+    const t = UI_I18N[uiLang] || UI_I18N.ar;
     experienceList.innerHTML = state.experience.map(function(e, idx){
       return '<div class="entry" data-id="' + e.id + '">' +
-        '<div class="entry-top"><span class="entry-index">الوظيفة ' + (idx+1) + '</span>' +
-        '<button class="btn subtle" data-action="remove-exp" data-id="' + e.id + '">حذف</button></div>' +
+        '<div class="entry-top"><span class="entry-index">' + t.entryJobPrefix + ' ' + (idx+1) + '</span>' +
+        '<button class="btn subtle" data-action="remove-exp" data-id="' + e.id + '">' + t.entryRemove + '</button></div>' +
         '<div class="field-row">' +
-          '<div class="field"><label>المسمى الوظيفي</label><input data-field="role" data-id="' + e.id + '" value="' + escAttr(e.role) + '" placeholder="أخصائية تسويق"></div>' +
-          '<div class="field"><label>اسم الشركة</label><input data-field="company" data-id="' + e.id + '" value="' + escAttr(e.company) + '" placeholder="شركة النور التجارية"></div>' +
+          '<div class="field"><label>' + t.entryRole + '</label><input data-field="role" data-id="' + e.id + '" value="' + escAttr(e.role) + '" placeholder="أخصائية تسويق"></div>' +
+          '<div class="field"><label>' + t.entryCompany + '</label><input data-field="company" data-id="' + e.id + '" value="' + escAttr(e.company) + '" placeholder="شركة النور التجارية"></div>' +
         '</div>' +
         '<div class="field-row">' +
-          '<div class="field"><label>الموقع</label><input data-field="location" data-id="' + e.id + '" value="' + escAttr(e.location) + '" placeholder="دبي"></div>' +
-          '<div class="field"><label>التواريخ</label><div style="display:flex; gap:6px;">' +
+          '<div class="field"><label>' + t.entryLocation + '</label><input data-field="location" data-id="' + e.id + '" value="' + escAttr(e.location) + '" placeholder="دبي"></div>' +
+          '<div class="field"><label>' + t.entryDates + '</label><div style="display:flex; gap:6px;">' +
             '<input data-field="start" data-id="' + e.id + '" value="' + escAttr(e.start) + '" placeholder="2020" style="width:50%">' +
             '<input data-field="end" data-id="' + e.id + '" value="' + escAttr(e.end) + '" placeholder="حتى الآن" style="width:50%">' +
           '</div></div>' +
         '</div>' +
-        '<div class="field"><label>أهم المهام (كلمات مفتاحية تكفي)</label>' +
+        '<div class="field"><label>' + t.entryTasks + '</label>' +
           '<textarea data-field="bulletsText" data-id="' + e.id + '" style="min-height:80px" placeholder="إشراف على الحسابات، إعداد الموازنات، متابعة التدقيق...">' + escapeHtml(e.bulletsText) + '</textarea></div>' +
-        '<div class="row-actions"><button class="btn ai" data-action="ai-exp" data-id="' + e.id + '">صياغة بالذكاء الاصطناعي</button>' +
+        '<div class="row-actions"><button class="btn ai" data-action="ai-exp" data-id="' + e.id + '">' + t.aiPolishBtn + '</button>' +
           '<span class="ai-status" data-status-exp="' + e.id + '"></span></div>' +
       '</div>';
     }).join('');
@@ -1156,22 +1177,23 @@
   // ---------- Education form ----------
   const educationList = document.getElementById('educationList');
   function renderEducationForm(){
+    const t = UI_I18N[uiLang] || UI_I18N.ar;
     educationList.innerHTML = state.education.map(function(e, idx){
       return '<div class="entry" data-id="' + e.id + '">' +
-        '<div class="entry-top"><span class="entry-index">الشهادة ' + (idx+1) + '</span>' +
-        '<button class="btn subtle" data-action="remove-edu" data-id="' + e.id + '">حذف</button></div>' +
+        '<div class="entry-top"><span class="entry-index">' + t.entryCertPrefix + ' ' + (idx+1) + '</span>' +
+        '<button class="btn subtle" data-action="remove-edu" data-id="' + e.id + '">' + t.entryRemove + '</button></div>' +
         '<div class="field-row">' +
-          '<div class="field"><label>الشهادة</label><input data-field="degree" data-id="' + e.id + '" value="' + escAttr(e.degree) + '" placeholder="بكالوريوس محاسبة"></div>' +
-          '<div class="field"><label>الجامعة</label><input data-field="school" data-id="' + e.id + '" value="' + escAttr(e.school) + '" placeholder="..."></div>' +
+          '<div class="field"><label>' + t.entryDegree + '</label><input data-field="degree" data-id="' + e.id + '" value="' + escAttr(e.degree) + '" placeholder="بكالوريوس محاسبة"></div>' +
+          '<div class="field"><label>' + t.entrySchool + '</label><input data-field="school" data-id="' + e.id + '" value="' + escAttr(e.school) + '" placeholder="..."></div>' +
         '</div>' +
         '<div class="field-row">' +
-          '<div class="field"><label>الموقع</label><input data-field="location" data-id="' + e.id + '" value="' + escAttr(e.location) + '" placeholder="..."></div>' +
-          '<div class="field"><label>التواريخ</label><div style="display:flex; gap:6px;">' +
+          '<div class="field"><label>' + t.entryLocation + '</label><input data-field="location" data-id="' + e.id + '" value="' + escAttr(e.location) + '" placeholder="..."></div>' +
+          '<div class="field"><label>' + t.entryDates + '</label><div style="display:flex; gap:6px;">' +
             '<input data-field="start" data-id="' + e.id + '" value="' + escAttr(e.start) + '" placeholder="2003" style="width:50%">' +
             '<input data-field="end" data-id="' + e.id + '" value="' + escAttr(e.end) + '" placeholder="2007" style="width:50%">' +
           '</div></div>' +
         '</div>' +
-        '<div class="field"><label>تفاصيل إضافية (اختياري)</label><input data-field="detail" data-id="' + e.id + '" value="' + escAttr(e.detail) + '" placeholder="بتقدير امتياز"></div>' +
+        '<div class="field"><label>' + t.entryDetail + '</label><input data-field="detail" data-id="' + e.id + '" value="' + escAttr(e.detail) + '" placeholder="بتقدير امتياز"></div>' +
       '</div>';
     }).join('');
   }
