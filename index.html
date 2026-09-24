@@ -155,10 +155,24 @@
   .cl-para{ font-size: 15px; line-height:1.9; margin:0; }
   .cl-close{ font-size: 15px; line-height:1.9; margin:0; }
 
+  html{ overflow-x:hidden; }
+  body{ overflow-x:hidden; }
   @media (max-width: 880px){
     .layout{ grid-template-columns: 1fr; }
     .desk{ max-height:none; border-left:none; border-bottom: 1px solid var(--border); }
     .preview-wrap{ max-height:none; }
+  }
+  @media (max-width: 600px){
+    .app-header{ padding: 16px 16px 14px; }
+    .app-header h1{ font-size: 20px; }
+    .app-header p{ font-size: 12.5px; }
+    .auth-row input{ width: 100%; max-width: 220px; }
+    .desk{ padding: 16px 16px 40px; }
+    .preview-wrap{ padding: 16px 14px 40px; }
+    .toolbar, .lang-row{ max-width: 100%; }
+    .pages{ max-width: 100%; }
+    .sheet{ padding: 34px 26px; }
+    .cv-name{ font-size: 24px; }
   }
 
   @media print{
@@ -736,7 +750,7 @@
   // ============ Accounts: login, per-user save, and payment unlock ============
   const SUPABASE_URL = "https://bhcxptbnoobhspurzgbe.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_qODw3t7tKDtw5DGASlFL8Q_NNnDT1Vb";
-  const GUMROAD_LINK = "PASTE_YOUR_GUMROAD_LINK_HERE";
+  const GUMROAD_LINK = "https://iroseorchid.gumroad.com/l/fgjqj";
   const sb = (SUPABASE_URL.indexOf('http') === 0 && window.supabase)
     ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
