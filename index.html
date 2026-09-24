@@ -51,6 +51,10 @@
   .auth-row{ display:flex; align-items:center; gap:10px; margin-top:12px; flex-wrap:wrap; }
   .auth-row input{ width:220px; }
   .auth-status{ font-size:12px; color:var(--muted); }
+  .progress-row{ display:flex; align-items:center; gap:10px; margin-top:10px; }
+  .progress-track{ flex:1; height:6px; background:var(--border); border-radius:4px; overflow:hidden; }
+  .progress-fill{ height:100%; background:var(--grad); border-radius:4px; transition:width .3s ease; }
+  .progress-label{ font-size:11.5px; color:var(--muted); font-weight:600; white-space:nowrap; }
 
   .layout{ display:grid; grid-template-columns: 440px 1fr; align-items: start; min-height: calc(100vh - 92px); }
   .desk{ padding: 24px 24px 60px; max-height: calc(100vh - 92px); overflow-y: auto; border-left: 1px solid var(--border); }
@@ -204,6 +208,10 @@
         <button class="btn subtle" id="authLogout">تسجيل الخروج</button>
       </div>
     </div>
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <span class="progress-label" id="progressLabel">اكتمال السيرة الذاتية: 0%</span>
+    </div>
   </div>
 
   <div class="layout">
@@ -237,6 +245,7 @@
           <div class="field"><label for="f-linkedin">لينكدإن (اختياري)</label><input id="f-linkedin" placeholder="linkedin.com/in/..."></div>
         </div>
         <div class="field"><label for="f-website">موقع شخصي (اختياري)</label><input id="f-website" placeholder="..."></div>
+        <div class="field" style="margin-top:4px;"><label style="display:flex; align-items:center; gap:6px; font-weight:500; cursor:pointer;"><input type="checkbox" id="f-hide-personal" style="width:auto;"> نمط دولي: إخفاء تاريخ الميلاد والجنسية من السيرة الذاتية</label></div>
         </div>
       </div>
 
@@ -311,6 +320,20 @@
         </div>
       </div>
 
+      <div class="section collapsed" data-section="publications">
+        <div class="section-head"><h3>٩. منشورات علمية أو أبحاث (اختياري)</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+        <div class="section-note">مناسب للسيرة الأكاديمية أو البحثية — سطر لكل بحث أو منشور يكفي.</div>
+        <div class="field"><label for="f-publications">أبحاث، منشورات، مؤتمرات...</label>
+          <textarea id="f-publications" style="min-height:70px" placeholder="اسم البحث، مكان النشر، السنة..."></textarea>
+        </div>
+        <div class="row-actions">
+          <button class="btn ai" id="publicationsAiBtn">صياغة بالذكاء الاصطناعي</button>
+          <span class="ai-status" id="publicationsStatus"></span>
+        </div>
+        </div>
+      </div>
+
       <div class="section collapsed" data-section="letter">
         <div class="section-head"><h3>خطاب التقديم</h3><span class="chevron">▾</span></div>
         <div class="section-body">
@@ -375,7 +398,7 @@
   const state = {
     name:"", birthdate:"", nationality:"", email:"", phone:"", location:"", linkedin:"", website:"",
     title:"", summary:"",
-    experience: [], education: [], skills: [], languages: [], hobbies: [], additionalInfo:"",
+    experience: [], education: [], skills: [], languages: [], hobbies: [], additionalInfo:"", publications:"", hidePersonalMeta:false,
     letter: { company:"", role:"", recipient:"", notes:"", body:"" },
     translations: {}
   };
@@ -419,13 +442,13 @@
 
   // ============ i18n ============
   const STRINGS = {
-    ar: { summary:'نبذة مهنية', experience:'الخبرات العملية', education:'التعليم', skills:'المهارات', languages:'اللغات', hobbies:'الهوايات والاهتمامات', additional:'معلومات إضافية', yourName:'اسمك الكامل', addContact:'أضف بيانات التواصل من القائمة على اليمين', dobPrefix:'تاريخ الميلاد: ', natPrefix:'الجنسية: ', hiringTeam:'فريق التوظيف', sincerely:'مع خالص التقدير،', letterEmptyBody:'صِغ نص الخطاب من القائمة على اليمين، أو اكتبه بنفسك.', resumeDocLabel:'السيرة الذاتية', letterDocLabel:'خطاب التقديم', continuedWord:'، تابع', roleFallback:'المسمى الوظيفي', degreeFallback:'الشهادة', pageOf:function(n,t){ return 'صفحة ' + n + ' من ' + t; } },
-    en: { summary:'Summary', experience:'Experience', education:'Education', skills:'Skills', languages:'Languages', hobbies:'Hobbies & Interests', additional:'Additional Information', yourName:'Your name', addContact:'Add your contact details on the right', dobPrefix:'Date of birth: ', natPrefix:'Nationality: ', hiringTeam:'Hiring Team', sincerely:'Sincerely,', letterEmptyBody:'Draft the letter body on the right, or write it yourself.', resumeDocLabel:'Resume', letterDocLabel:'Cover Letter', continuedWord:', continued', roleFallback:'Role', degreeFallback:'Degree', pageOf:function(n,t){ return 'page ' + n + ' of ' + t; } },
-    es: { summary:'Resumen', experience:'Experiencia', education:'Formación', skills:'Habilidades', languages:'Idiomas', hobbies:'Aficiones e intereses', additional:'Información adicional', yourName:'Tu nombre', addContact:'Añade tus datos de contacto a la derecha', dobPrefix:'Fecha de nacimiento: ', natPrefix:'Nacionalidad: ', hiringTeam:'Equipo de contratación', sincerely:'Atentamente,', letterEmptyBody:'Redacta el cuerpo de la carta a la derecha, o escríbelo tú mismo.', resumeDocLabel:'Currículum', letterDocLabel:'Carta de presentación', continuedWord:', continuación', roleFallback:'Puesto', degreeFallback:'Título', pageOf:function(n,t){ return 'página ' + n + ' de ' + t; } },
-    fr: { summary:'Résumé', experience:'Expérience', education:'Formation', skills:'Compétences', languages:'Langues', hobbies:"Loisirs et centres d'intérêt", additional:'Informations complémentaires', yourName:'Votre nom', addContact:'Ajoutez vos coordonnées à droite', dobPrefix:'Date de naissance : ', natPrefix:'Nationalité : ', hiringTeam:'Équipe de recrutement', sincerely:'Cordialement,', letterEmptyBody:"Rédigez le corps de la lettre à droite, ou écrivez-le vous-même.", resumeDocLabel:'CV', letterDocLabel:'Lettre de motivation', continuedWord:', suite', roleFallback:'Poste', degreeFallback:'Diplôme', pageOf:function(n,t){ return 'page ' + n + ' sur ' + t; } },
-    it: { summary:'Riepilogo', experience:'Esperienza', education:'Istruzione', skills:'Competenze', languages:'Lingue', hobbies:'Interessi e hobby', additional:'Informazioni aggiuntive', yourName:'Il tuo nome', addContact:'Aggiungi i tuoi contatti a destra', dobPrefix:'Data di nascita: ', natPrefix:'Nazionalità: ', hiringTeam:'Team di selezione', sincerely:'Cordiali saluti,', letterEmptyBody:'Scrivi il corpo della lettera a destra, oppure scrivilo tu stesso.', resumeDocLabel:'Curriculum', letterDocLabel:'Lettera di presentazione', continuedWord:', continua', roleFallback:'Ruolo', degreeFallback:'Laurea', pageOf:function(n,t){ return 'pagina ' + n + ' di ' + t; } },
-    ru: { summary:'Резюме', experience:'Опыт работы', education:'Образование', skills:'Навыки', languages:'Языки', hobbies:'Хобби и интересы', additional:'Дополнительная информация', yourName:'Ваше имя', addContact:'Добавьте контактные данные справа', dobPrefix:'Дата рождения: ', natPrefix:'Национальность: ', hiringTeam:'Отдел кадров', sincerely:'С уважением,', letterEmptyBody:'Напишите текст письма справа или составьте его сами.', resumeDocLabel:'Резюме', letterDocLabel:'Сопроводительное письмо', continuedWord:', продолжение', roleFallback:'Должность', degreeFallback:'Степень', pageOf:function(n,t){ return 'страница ' + n + ' из ' + t; } },
-    zh: { summary:'个人简介', experience:'工作经历', education:'教育背景', skills:'技能', languages:'语言', hobbies:'兴趣爱好', additional:'补充信息', yourName:'您的姓名', addContact:'请在右侧添加联系方式', dobPrefix:'出生日期：', natPrefix:'国籍：', hiringTeam:'招聘团队', sincerely:'祝好，', letterEmptyBody:'请在右侧撰写信函正文，或自行填写。', resumeDocLabel:'简历', letterDocLabel:'求职信', continuedWord:'（续）', roleFallback:'职位', degreeFallback:'学位', pageOf:function(n,t){ return '第' + n + '页，共' + t + '页'; } }
+    ar: { summary:'نبذة مهنية', experience:'الخبرات العملية', education:'التعليم', skills:'المهارات', languages:'اللغات', hobbies:'الهوايات والاهتمامات', additional:'معلومات إضافية', yourName:'اسمك الكامل', addContact:'أضف بيانات التواصل من القائمة على اليمين', dobPrefix:'تاريخ الميلاد: ', natPrefix:'الجنسية: ', hiringTeam:'فريق التوظيف', sincerely:'مع خالص التقدير،', letterEmptyBody:'صِغ نص الخطاب من القائمة على اليمين، أو اكتبه بنفسك.', resumeDocLabel:'السيرة الذاتية', letterDocLabel:'خطاب التقديم', continuedWord:'، تابع', roleFallback:'المسمى الوظيفي', degreeFallback:'الشهادة', publications:'المنشورات العلمية والأبحاث', pageOf:function(n,t){ return 'صفحة ' + n + ' من ' + t; } },
+    en: { summary:'Summary', experience:'Experience', education:'Education', skills:'Skills', languages:'Languages', hobbies:'Hobbies & Interests', additional:'Additional Information', yourName:'Your name', addContact:'Add your contact details on the right', dobPrefix:'Date of birth: ', natPrefix:'Nationality: ', hiringTeam:'Hiring Team', sincerely:'Sincerely,', letterEmptyBody:'Draft the letter body on the right, or write it yourself.', resumeDocLabel:'Resume', letterDocLabel:'Cover Letter', continuedWord:', continued', roleFallback:'Role', degreeFallback:'Degree', publications:'Publications & Research', pageOf:function(n,t){ return 'page ' + n + ' of ' + t; } },
+    es: { summary:'Resumen', experience:'Experiencia', education:'Formación', skills:'Habilidades', languages:'Idiomas', hobbies:'Aficiones e intereses', additional:'Información adicional', yourName:'Tu nombre', addContact:'Añade tus datos de contacto a la derecha', dobPrefix:'Fecha de nacimiento: ', natPrefix:'Nacionalidad: ', hiringTeam:'Equipo de contratación', sincerely:'Atentamente,', letterEmptyBody:'Redacta el cuerpo de la carta a la derecha, o escríbelo tú mismo.', resumeDocLabel:'Currículum', letterDocLabel:'Carta de presentación', continuedWord:', continuación', roleFallback:'Puesto', degreeFallback:'Título', publications:'Publicaciones e investigación', pageOf:function(n,t){ return 'página ' + n + ' de ' + t; } },
+    fr: { summary:'Résumé', experience:'Expérience', education:'Formation', skills:'Compétences', languages:'Langues', hobbies:"Loisirs et centres d'intérêt", additional:'Informations complémentaires', yourName:'Votre nom', addContact:'Ajoutez vos coordonnées à droite', dobPrefix:'Date de naissance : ', natPrefix:'Nationalité : ', hiringTeam:'Équipe de recrutement', sincerely:'Cordialement,', letterEmptyBody:"Rédigez le corps de la lettre à droite, ou écrivez-le vous-même.", resumeDocLabel:'CV', letterDocLabel:'Lettre de motivation', continuedWord:', suite', roleFallback:'Poste', degreeFallback:'Diplôme', publications:'Publications et recherche', pageOf:function(n,t){ return 'page ' + n + ' sur ' + t; } },
+    it: { summary:'Riepilogo', experience:'Esperienza', education:'Istruzione', skills:'Competenze', languages:'Lingue', hobbies:'Interessi e hobby', additional:'Informazioni aggiuntive', yourName:'Il tuo nome', addContact:'Aggiungi i tuoi contatti a destra', dobPrefix:'Data di nascita: ', natPrefix:'Nazionalità: ', hiringTeam:'Team di selezione', sincerely:'Cordiali saluti,', letterEmptyBody:'Scrivi il corpo della lettera a destra, oppure scrivilo tu stesso.', resumeDocLabel:'Curriculum', letterDocLabel:'Lettera di presentazione', continuedWord:', continua', roleFallback:'Ruolo', degreeFallback:'Laurea', publications:'Pubblicazioni e ricerca', pageOf:function(n,t){ return 'pagina ' + n + ' di ' + t; } },
+    ru: { summary:'Резюме', experience:'Опыт работы', education:'Образование', skills:'Навыки', languages:'Языки', hobbies:'Хобби и интересы', additional:'Дополнительная информация', yourName:'Ваше имя', addContact:'Добавьте контактные данные справа', dobPrefix:'Дата рождения: ', natPrefix:'Национальность: ', hiringTeam:'Отдел кадров', sincerely:'С уважением,', letterEmptyBody:'Напишите текст письма справа или составьте его сами.', resumeDocLabel:'Резюме', letterDocLabel:'Сопроводительное письмо', continuedWord:', продолжение', roleFallback:'Должность', degreeFallback:'Степень', publications:'Публикации и исследования', pageOf:function(n,t){ return 'страница ' + n + ' из ' + t; } },
+    zh: { summary:'个人简介', experience:'工作经历', education:'教育背景', skills:'技能', languages:'语言', hobbies:'兴趣爱好', additional:'补充信息', yourName:'您的姓名', addContact:'请在右侧添加联系方式', dobPrefix:'出生日期：', natPrefix:'国籍：', hiringTeam:'招聘团队', sincerely:'祝好，', letterEmptyBody:'请在右侧撰写信函正文，或自行填写。', resumeDocLabel:'简历', letterDocLabel:'求职信', continuedWord:'（续）', roleFallback:'职位', degreeFallback:'学位', publications:'论文与研究成果', pageOf:function(n,t){ return '第' + n + '页，共' + t + '页'; } }
   };
   const LOCALE_MAP = { ar:'ar', en:'en-US', es:'es-ES', fr:'fr-FR', it:'it-IT', ru:'ru-RU', zh:'zh-CN' };
   const LANG_NAMES_AR = { en:'الإنجليزية', es:'الإسبانية', fr:'الفرنسية', it:'الإيطالية', ru:'الروسية', zh:'الصينية' };
@@ -460,12 +483,12 @@
       summary: state.summary,
       experience: state.experience.map(function(e){ return { company:e.company, role:e.role, location:e.location, start:e.start, end:e.end, bullets: bulletsFromText(e.bulletsText) }; }),
       education: state.education.map(function(e){ return { school:e.school, degree:e.degree, location:e.location, start:e.start, end:e.end, detail:e.detail }; }),
-      skills: state.skills, languages: state.languages, hobbies: state.hobbies, additionalInfo: state.additionalInfo,
+      skills: state.skills, languages: state.languages, hobbies: state.hobbies, additionalInfo: state.additionalInfo, publications: state.publications,
       letter: { company: state.letter.company, role: state.letter.role, recipient: state.letter.recipient, body: state.letter.body }
     };
     const raw = await callClaude(
       'ترجم محتوى السيرة الذاتية التالي (بصيغة JSON) إلى اللغة ' + LANG_NAMES_AR[lang] + '، مع الحفاظ التام على نفس بنية JSON ونفس المفاتيح:\n' + JSON.stringify(payload) +
-      '\n\nقواعد الترجمة: ترجم كل النصوص الوصفية (title, summary, role, bullets, degree, detail, skills, languages, hobbies, additionalInfo, letter.role, letter.body) إلى اللغة المطلوبة بأسلوب مهني ومختصر. اسم الشخص (name): إن كانت اللغة الهدف غير عربية، اكتبه بحروف لاتينية بطريقة شائعة لنقل النطق، وإلا اتركه كما هو. أسماء الشركات (company) والجامعات/المدارس (school): إن كانت أسماء معروفة استخدم اسمها الرسمي المعتاد بهذه اللغة، وإلا فقط اكتبها بحروف لاتينية مقاربة للنطق دون اختراع اسم آخر. التواريخ الرقمية (start, end) اتركها كما هي، وترجم فقط كلمات مثل «حتى الآن» إلى ما يقابلها. لا تضف ولا تحذف أي معلومة، ولا تخترع أي حقيقة غير موجودة في النص الأصلي. أرجع فقط كائن JSON بنفس البنية تماماً، دون أي نص إضافي أو علامات markdown.',
+      '\n\nقواعد الترجمة: ترجم كل النصوص الوصفية (title, summary, role, bullets, degree, detail, skills, languages, hobbies, additionalInfo, publications, letter.role, letter.body) إلى اللغة المطلوبة بأسلوب مهني ومختصر. اسم الشخص (name): إن كانت اللغة الهدف غير عربية، اكتبه بحروف لاتينية بطريقة شائعة لنقل النطق، وإلا اتركه كما هو. أسماء الشركات (company) والجامعات/المدارس (school): إن كانت أسماء معروفة استخدم اسمها الرسمي المعتاد بهذه اللغة، وإلا فقط اكتبها بحروف لاتينية مقاربة للنطق دون اختراع اسم آخر. التواريخ الرقمية (start, end) اتركها كما هي، وترجم فقط كلمات مثل «حتى الآن» إلى ما يقابلها. لا تضف ولا تحذف أي معلومة، ولا تخترع أي حقيقة غير موجودة في النص الأصلي. أرجع فقط كائن JSON بنفس البنية تماماً، دون أي نص إضافي أو علامات markdown.',
       { system: 'أنت مترجم محترف متخصص في السير الذاتية. ترجع فقط JSON صالحاً مطابقاً للبنية المطلوبة، دون أي تعليق أو معلومات مُضافة.', maxTokens: 4096 }
     );
     const t = parseJSONLoose(raw);
@@ -473,9 +496,10 @@
       name: t.name || state.name, birthdate: state.birthdate, nationality: t.nationality || state.nationality,
       email: state.email, phone: state.phone, location: t.location || state.location,
       linkedin: state.linkedin, website: state.website, title: t.title || state.title, summary: t.summary || '',
+      hidePersonalMeta: state.hidePersonalMeta,
       experience: (t.experience || []).map(function(e){ return { company: e.company||'', role: e.role||'', location: e.location||'', start: e.start||'', end: e.end||'', bulletsText: Array.isArray(e.bullets) ? e.bullets.join('\n') : '' }; }),
       education: (t.education || []).map(function(e){ return { school:e.school||'', degree:e.degree||'', location:e.location||'', start:e.start||'', end:e.end||'', detail:e.detail||'' }; }),
-      skills: t.skills || [], languages: t.languages || [], hobbies: t.hobbies || [], additionalInfo: t.additionalInfo || '',
+      skills: t.skills || [], languages: t.languages || [], hobbies: t.hobbies || [], additionalInfo: t.additionalInfo || '', publications: t.publications || '',
       letter: { company: (t.letter && t.letter.company) || state.letter.company, role: (t.letter && t.letter.role) || state.letter.role, recipient: (t.letter && t.letter.recipient) || state.letter.recipient, body: (t.letter && t.letter.body) || '' }
     };
     state.translations[lang] = content;
@@ -568,7 +592,7 @@
   function resumeUnits(content, labels){
     const units = [];
     const contactBits = [content.location, content.email, content.phone, content.linkedin, content.website].filter(Boolean).map(escapeHtml).join('<span class="sep">|</span>');
-    const metaBits = [content.birthdate ? (labels.dobPrefix + escapeHtml(content.birthdate)) : '', content.nationality ? (labels.natPrefix + escapeHtml(content.nationality)) : ''].filter(Boolean).join('<span class="sep">|</span>');
+    const metaBits = content.hidePersonalMeta ? '' : [content.birthdate ? (labels.dobPrefix + escapeHtml(content.birthdate)) : '', content.nationality ? (labels.natPrefix + escapeHtml(content.nationality)) : ''].filter(Boolean).join('<span class="sep">|</span>');
     let head = '<div class="unit" style="padding-bottom:20px;">';
     head += '<div class="cv-name">' + (escapeHtml(content.name) || ('<span class="cv-empty">' + labels.yourName + '</span>')) + '</div>';
     if (content.title) head += '<div class="cv-title">' + escapeHtml(content.title) + '</div>';
@@ -625,6 +649,14 @@
       units.push(titleUnit(labels.additional));
       units.push({ html: '<div class="unit" style="padding-bottom:6px;"><p class="cv-summary">' + escapeHtml(content.additionalInfo) + '</p></div>', isTitle:false, sectionLabel:labels.additional });
     }
+    if (content.publications){
+      units.push(titleUnit(labels.publications));
+      const pubLines = bulletsFromText(content.publications);
+      const pubHtml = pubLines.length > 1
+        ? '<ul class="cv-bullets">' + pubLines.map(function(p){ return '<li>' + escapeHtml(p) + '</li>'; }).join('') + '</ul>'
+        : '<p class="cv-summary">' + escapeHtml(content.publications) + '</p>';
+      units.push({ html: '<div class="unit" style="padding-bottom:6px;">' + pubHtml + '</div>', isTitle:false, sectionLabel:labels.publications });
+    }
     return units;
   }
 
@@ -672,7 +704,22 @@
     requestAnimationFrame(function(){ layoutScheduled = false; doLayout(); });
   }
 
+  function updateCompleteness(){
+    const checks = [
+      !!state.name, !!state.title, !!state.summary,
+      state.experience.some(function(e){ return e.role || e.company || e.bulletsText; }),
+      state.education.some(function(e){ return e.school || e.degree; }),
+      state.skills.length > 0
+    ];
+    const pct = Math.round(checks.filter(Boolean).length / checks.length * 100);
+    const fill = document.getElementById('progressFill');
+    const label = document.getElementById('progressLabel');
+    if (fill) fill.style.width = pct + '%';
+    if (label) label.textContent = 'اكتمال السيرة الذاتية: ' + pct + '%';
+  }
+
   function doLayout(){
+    updateCompleteness();
     const lang = previewLang;
     const labels = STRINGS[lang];
     const dir = dirOf(lang);
@@ -907,7 +954,8 @@
   bindField('f-name','name'); bindField('f-birthdate','birthdate'); bindField('f-nationality','nationality');
   bindField('f-title','title'); bindField('f-email','email'); bindField('f-phone','phone');
   bindField('f-location','location'); bindField('f-linkedin','linkedin'); bindField('f-website','website');
-  bindField('f-summary','summary'); bindField('f-additional','additionalInfo');
+  bindField('f-summary','summary'); bindField('f-additional','additionalInfo'); bindField('f-publications','publications');
+  document.getElementById('f-hide-personal').addEventListener('change', function(){ state.hidePersonalMeta = this.checked; markDirty(); scheduleLayout(); });
   bindListField('f-skills','skills'); bindListField('f-languages','languages'); bindListField('f-hobbies','hobbies');
   bindLetterField('f-letter-company','company'); bindLetterField('f-letter-role','role');
   bindLetterField('f-letter-recipient','recipient'); bindLetterField('f-letter-notes','notes');
@@ -925,6 +973,8 @@
     document.getElementById('f-website').value = state.website || "";
     document.getElementById('f-summary').value = state.summary || "";
     document.getElementById('f-additional').value = state.additionalInfo || "";
+    document.getElementById('f-publications').value = state.publications || "";
+    document.getElementById('f-hide-personal').checked = !!state.hidePersonalMeta;
     document.getElementById('f-skills').value = (state.skills || []).join('، ');
     document.getElementById('f-languages').value = (state.languages || []).join('، ');
     document.getElementById('f-hobbies').value = (state.hobbies || []).join('، ');
@@ -1085,6 +1135,23 @@
     btn.disabled = false;
   });
 
+  // ---------- Publications AI ----------
+  document.getElementById('publicationsAiBtn').addEventListener('click', async function(){
+    const btn = this, statusEl = document.getElementById('publicationsStatus');
+    if (!state.publications.trim()){ setStatus(statusEl, "أضف ملاحظات أولاً.", true); return; }
+    btn.disabled = true; setStatus(statusEl, "جارٍ الصياغة…");
+    try {
+      const text = await callClaude(
+        'ملاحظات خام عن أبحاث أو منشورات علمية:\n' + state.publications + '\n\nأعد صياغتها كقائمة منشورات أكاديمية مرتّبة، سطر لكل منشور بصيغة موحّدة (اسم البحث، مكان النشر أو المؤتمر، السنة) بناءً على ما ذُكر فقط دون إضافة أي تفصيل جديد. ' + ARABIC_STYLE + ' أرجع النص فقط، سطر لكل منشور.',
+        { system: 'أنت محرر سير ذاتية أكاديمية محترف ودقيق. ترجع فقط النص المطلوب دون أي مقدمة.' }
+      );
+      state.publications = text.replace(/^"+|"+$/g, '').trim();
+      document.getElementById('f-publications').value = state.publications;
+      markDirty(); scheduleLayout(); setStatus(statusEl, "");
+    } catch(err){ setStatus(statusEl, "تعذّرت الصياغة الآن.", true); }
+    btn.disabled = false;
+  });
+
   // ---------- Letter AI ----------
   document.getElementById('letterAiBtn').addEventListener('click', async function(){
     const btn = this, statusEl = document.getElementById('letterStatus'), l = state.letter;
@@ -1117,7 +1184,7 @@
     const input = document.getElementById('quickstartInput').value.trim();
     if (!input){ setStatus(statusEl, "ألصق نصاً أولاً.", true); return; }
     btn.disabled = true; setStatus(statusEl, "جارٍ الصياغة…");
-    const schema = '{"name":"","birthdate":"","nationality":"","title":"","email":"","phone":"","location":"","linkedin":"","website":"","summary":"","experience":[{"company":"","role":"","location":"","start":"","end":"","bullets":["..."]}],"education":[{"school":"","degree":"","location":"","start":"","end":"","detail":""}],"skills":["..."],"languages":["..."],"hobbies":["..."],"additionalInfo":"","targetCompany":"","targetRole":""}';
+    const schema = '{"name":"","birthdate":"","nationality":"","title":"","email":"","phone":"","location":"","linkedin":"","website":"","summary":"","experience":[{"company":"","role":"","location":"","start":"","end":"","bullets":["..."]}],"education":[{"school":"","degree":"","location":"","start":"","end":"","detail":""}],"skills":["..."],"languages":["..."],"hobbies":["..."],"additionalInfo":"","publications":"","targetCompany":"","targetRole":""}';
     try {
       const raw = await callClaude(
         'نص خام من المستخدم:\n"""\n' + input + '\n"""\n\nاستخرج منه مسودة أولى لسيرة ذاتية بصيغة JSON صارمة تطابق تماماً هذا المخطط (استخدم نصاً فارغاً "" أو مصفوفة فارغة [] لأي شيء غير معروف، ولا تخترع أبداً أسماء شركات أو تواريخ أو جامعات أو أرقاماً لم تُذكر أو تُفهم ضمناً بوضوح؛ إن ذُكرت شركة أو وظيفة محددة يتقدم المستخدم لها، ضعها في targetCompany / targetRole):\n' + schema + '\n\n' + ARABIC_STYLE + ' أرجع فقط كائن JSON، دون أي نص إضافي أو علامات markdown.',
@@ -1141,6 +1208,7 @@
     state.website = draft.website || state.website;
     state.summary = draft.summary || state.summary;
     state.additionalInfo = draft.additionalInfo || state.additionalInfo;
+    state.publications = draft.publications || state.publications;
     state.skills = (draft.skills && draft.skills.length) ? draft.skills : state.skills;
     state.languages = (draft.languages && draft.languages.length) ? draft.languages : state.languages;
     state.hobbies = (draft.hobbies && draft.hobbies.length) ? draft.hobbies : state.hobbies;
