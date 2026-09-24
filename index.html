@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <style>
   :root{
     --bg:#F6F7FC; --bg-2:#FFFFFF;
@@ -132,6 +133,10 @@
   .page-footer{ position:absolute; bottom:20px; left:58px; font-family: "Cairo", var(--sans); font-size:10.5px; color: #C7CAD4; }
   .sheet[dir="ltr"] .page-footer{ left:auto; right:58px; }
 
+  .cv-header-row{ display:flex; gap:16px; align-items:flex-start; }
+  .cv-photo{ width:92px; height:92px; border-radius:10px; object-fit:cover; flex-shrink:0; border:1px solid var(--paper-line); }
+  .cv-qr{ width:64px; height:64px; flex-shrink:0; }
+  .cv-header-text{ flex:1; min-width:0; }
   .cv-name{ font-size: 30px; font-weight: 700; color: var(--ink); margin: 0 0 2px; line-height:1.3; }
   .cv-title{ font-family: "Cairo", var(--sans); font-size: 14px; font-weight:700; color: var(--brass-deep); margin: 0 0 8px; }
   .cv-contact{ font-family: "Cairo", var(--sans); font-size: 12.5px; color: var(--paper-muted); line-height:1.7; }
@@ -232,6 +237,16 @@
         <div class="section-head"><h3>١. المعلومات الشخصية</h3><span class="chevron">▾</span></div>
         <div class="section-body">
         <div class="field"><label for="f-name">الاسم الكامل</label><input id="f-name" placeholder="سارة أحمد"></div>
+        <div class="field">
+          <label>صورة شخصية (اختياري)</label>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <img id="photoPreview" style="width:52px; height:52px; border-radius:8px; object-fit:cover; display:none; border:1px solid var(--border);">
+            <input type="file" id="f-photo" accept="image/*" style="display:none;">
+            <button class="btn" id="photoPickBtn" type="button">اختيار صورة</button>
+            <button class="btn subtle" id="photoRemoveBtn" type="button" style="display:none;">إزالة الصورة</button>
+          </div>
+          <div class="section-note" style="margin:6px 0 0;">لن تظهر الصورة إن فعّلت «النمط الدولي» أدناه — أغلب الشركات الأمريكية والأوروبية لا تفضّل الصور في السيرة الذاتية.</div>
+        </div>
         <div class="field-row">
           <div class="field"><label for="f-birthdate">تاريخ الميلاد</label><input id="f-birthdate" placeholder="29/11/1984"></div>
           <div class="field"><label for="f-nationality">الجنسية (اختياري)</label><input id="f-nationality" placeholder="..."></div>
@@ -246,6 +261,7 @@
         </div>
         <div class="field"><label for="f-website">موقع شخصي (اختياري)</label><input id="f-website" placeholder="..."></div>
         <div class="field" style="margin-top:4px;"><label style="display:flex; align-items:center; gap:6px; font-weight:500; cursor:pointer;"><input type="checkbox" id="f-hide-personal" style="width:auto;"> نمط دولي: إخفاء تاريخ الميلاد والجنسية من السيرة الذاتية</label></div>
+        <div class="field" style="margin-top:4px;"><label style="display:flex; align-items:center; gap:6px; font-weight:500; cursor:pointer;"><input type="checkbox" id="f-show-qr" style="width:auto;"> إظهار رمز QR في السيرة الذاتية (يربط لِلينكدإن أو موقعك الشخصي)</label></div>
         </div>
       </div>
 
@@ -334,6 +350,23 @@
         </div>
       </div>
 
+      <div class="section collapsed" data-section="ats">
+        <div class="section-head"><h3>١٠. مطابقة الوظيفة (ATS)</h3><span class="chevron">▾</span></div>
+        <div class="section-body">
+          <div class="section-note">الصق وصف الوظيفة، واحصل على نسبة توافق مع سيرتك الحالية واقتراحات كلمات ناقصة. لا يؤثّر على السيرة المطبوعة، أداة مساعدة فقط.</div>
+          <div class="field"><label for="f-ats-jd">وصف الوظيفة</label><textarea id="f-ats-jd" style="min-height:100px" placeholder="ألصق نص إعلان الوظيفة هنا..."></textarea></div>
+          <div class="row-actions"><button class="btn ai" id="atsRunBtn">احسب نسبة التوافق</button><span class="ai-status" id="atsStatus"></span></div>
+          <div id="atsResult" style="display:none; margin-top:12px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+              <div class="progress-track" style="flex:1;"><div class="progress-fill" id="atsScoreFill" style="width:0%"></div></div>
+              <span id="atsScoreLabel" style="font-weight:700; font-size:13px; white-space:nowrap;"></span>
+            </div>
+            <div id="atsAdvice" style="font-size:12.5px; color:var(--muted); margin-bottom:8px;"></div>
+            <div id="atsKeywords" style="display:flex; flex-wrap:wrap; gap:6px;"></div>
+          </div>
+        </div>
+      </div>
+
       <div class="section collapsed" data-section="letter">
         <div class="section-head"><h3>خطاب التقديم</h3><span class="chevron">▾</span></div>
         <div class="section-body">
@@ -398,7 +431,7 @@
   const state = {
     name:"", birthdate:"", nationality:"", email:"", phone:"", location:"", linkedin:"", website:"",
     title:"", summary:"",
-    experience: [], education: [], skills: [], languages: [], hobbies: [], additionalInfo:"", publications:"", hidePersonalMeta:false,
+    experience: [], education: [], skills: [], languages: [], hobbies: [], additionalInfo:"", publications:"", hidePersonalMeta:false, photo:"", showQr:false,
     letter: { company:"", role:"", recipient:"", notes:"", body:"" },
     translations: {}
   };
@@ -496,7 +529,7 @@
       name: t.name || state.name, birthdate: state.birthdate, nationality: t.nationality || state.nationality,
       email: state.email, phone: state.phone, location: t.location || state.location,
       linkedin: state.linkedin, website: state.website, title: t.title || state.title, summary: t.summary || '',
-      hidePersonalMeta: state.hidePersonalMeta,
+      hidePersonalMeta: state.hidePersonalMeta, photo: state.photo, showQr: state.showQr,
       experience: (t.experience || []).map(function(e){ return { company: e.company||'', role: e.role||'', location: e.location||'', start: e.start||'', end: e.end||'', bulletsText: Array.isArray(e.bullets) ? e.bullets.join('\n') : '' }; }),
       education: (t.education || []).map(function(e){ return { school:e.school||'', degree:e.degree||'', location:e.location||'', start:e.start||'', end:e.end||'', detail:e.detail||'' }; }),
       skills: t.skills || [], languages: t.languages || [], hobbies: t.hobbies || [], additionalInfo: t.additionalInfo || '', publications: t.publications || '',
@@ -593,12 +626,18 @@
     const units = [];
     const contactBits = [content.location, content.email, content.phone, content.linkedin, content.website].filter(Boolean).map(escapeHtml).join('<span class="sep">|</span>');
     const metaBits = content.hidePersonalMeta ? '' : [content.birthdate ? (labels.dobPrefix + escapeHtml(content.birthdate)) : '', content.nationality ? (labels.natPrefix + escapeHtml(content.nationality)) : ''].filter(Boolean).join('<span class="sep">|</span>');
-    let head = '<div class="unit" style="padding-bottom:20px;">';
+    let head = '<div class="unit" style="padding-bottom:20px;"><div class="cv-header-row">';
+    const showPhoto = content.photo && !content.hidePersonalMeta;
+    if (showPhoto) head += '<img class="cv-photo" src="' + content.photo + '">';
+    head += '<div class="cv-header-text">';
     head += '<div class="cv-name">' + (escapeHtml(content.name) || ('<span class="cv-empty">' + labels.yourName + '</span>')) + '</div>';
     if (content.title) head += '<div class="cv-title">' + escapeHtml(content.title) + '</div>';
     head += '<div class="cv-contact">' + (contactBits || ('<span class="cv-empty">' + labels.addContact + '</span>')) + '</div>';
     if (metaBits) head += '<div class="cv-meta2">' + metaBits + '</div>';
     head += '</div>';
+    const showQrImg = content.showQr && qrDataUrl && (content.linkedin || content.website) === qrForText;
+    if (showQrImg) head += '<img class="cv-qr" src="' + qrDataUrl + '">';
+    head += '</div></div>';
     units.push({ html: head, isTitle:false, sectionLabel:null });
 
     if (content.summary){
@@ -718,8 +757,21 @@
     if (label) label.textContent = 'اكتمال السيرة الذاتية: ' + pct + '%';
   }
 
+  let qrDataUrl = '';
+  let qrForText = '';
+  function updateQr(){
+    const target = state.showQr ? (state.linkedin || state.website || '') : '';
+    if (!target){ qrDataUrl = ''; qrForText = ''; return; }
+    if (target === qrForText && qrDataUrl) return;
+    if (typeof QRCode === 'undefined') return;
+    QRCode.toDataURL(target, { width: 120, margin: 1 }, function(err, url){
+      if (!err && url){ qrDataUrl = url; qrForText = target; scheduleLayout(); }
+    });
+  }
+
   function doLayout(){
     updateCompleteness();
+    updateQr();
     const lang = previewLang;
     const labels = STRINGS[lang];
     const dir = dirOf(lang);
@@ -956,6 +1008,44 @@
   bindField('f-location','location'); bindField('f-linkedin','linkedin'); bindField('f-website','website');
   bindField('f-summary','summary'); bindField('f-additional','additionalInfo'); bindField('f-publications','publications');
   document.getElementById('f-hide-personal').addEventListener('change', function(){ state.hidePersonalMeta = this.checked; markDirty(); scheduleLayout(); });
+  document.getElementById('f-show-qr').addEventListener('change', function(){ state.showQr = this.checked; markDirty(); scheduleLayout(); });
+
+  function resizeImageDataUrl(dataUrl, maxSize, callback){
+    const img = new Image();
+    img.onload = function(){
+      let w = img.width, h = img.height;
+      if (w > h){ if (w > maxSize){ h = Math.round(h * maxSize / w); w = maxSize; } }
+      else { if (h > maxSize){ w = Math.round(w * maxSize / h); h = maxSize; } }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      callback(canvas.toDataURL('image/jpeg', 0.85));
+    };
+    img.src = dataUrl;
+  }
+  document.getElementById('photoPickBtn').addEventListener('click', function(){ document.getElementById('f-photo').click(); });
+  document.getElementById('f-photo').addEventListener('change', function(e){
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      resizeImageDataUrl(ev.target.result, 400, function(resized){
+        state.photo = resized;
+        document.getElementById('photoPreview').src = resized;
+        document.getElementById('photoPreview').style.display = 'inline-block';
+        document.getElementById('photoRemoveBtn').style.display = 'inline-block';
+        markDirty(); scheduleLayout();
+      });
+    };
+    reader.readAsDataURL(file);
+  });
+  document.getElementById('photoRemoveBtn').addEventListener('click', function(){
+    state.photo = '';
+    document.getElementById('f-photo').value = '';
+    document.getElementById('photoPreview').style.display = 'none';
+    document.getElementById('photoRemoveBtn').style.display = 'none';
+    markDirty(); scheduleLayout();
+  });
   bindListField('f-skills','skills'); bindListField('f-languages','languages'); bindListField('f-hobbies','hobbies');
   bindLetterField('f-letter-company','company'); bindLetterField('f-letter-role','role');
   bindLetterField('f-letter-recipient','recipient'); bindLetterField('f-letter-notes','notes');
@@ -975,6 +1065,15 @@
     document.getElementById('f-additional').value = state.additionalInfo || "";
     document.getElementById('f-publications').value = state.publications || "";
     document.getElementById('f-hide-personal').checked = !!state.hidePersonalMeta;
+    document.getElementById('f-show-qr').checked = !!state.showQr;
+    if (state.photo){
+      document.getElementById('photoPreview').src = state.photo;
+      document.getElementById('photoPreview').style.display = 'inline-block';
+      document.getElementById('photoRemoveBtn').style.display = 'inline-block';
+    } else {
+      document.getElementById('photoPreview').style.display = 'none';
+      document.getElementById('photoRemoveBtn').style.display = 'none';
+    }
     document.getElementById('f-skills').value = (state.skills || []).join('، ');
     document.getElementById('f-languages').value = (state.languages || []).join('، ');
     document.getElementById('f-hobbies').value = (state.hobbies || []).join('، ');
@@ -1150,6 +1249,36 @@
       markDirty(); scheduleLayout(); setStatus(statusEl, "");
     } catch(err){ setStatus(statusEl, "تعذّرت الصياغة الآن.", true); }
     btn.disabled = false;
+  });
+
+  // ---------- ATS job match ----------
+  document.getElementById('atsRunBtn').addEventListener('click', async function(){
+    const jd = document.getElementById('f-ats-jd').value.trim();
+    const statusEl = document.getElementById('atsStatus');
+    if (!jd){ setStatus(statusEl, "ألصق وصف الوظيفة أولاً.", true); return; }
+    this.disabled = true; setStatus(statusEl, "جارٍ التحليل…");
+    const resumeSummary = [
+      state.title ? ('المسمى: ' + state.title) : '',
+      state.summary ? ('النبذة: ' + state.summary) : '',
+      state.experience.length ? ('الخبرات: ' + state.experience.map(function(e){ return [e.role, e.company].filter(Boolean).join(' في ') + (e.bulletsText ? (' - ' + e.bulletsText.replace(/\n/g, '؛ ')) : ''); }).join(' | ')) : '',
+      state.skills.length ? ('المهارات: ' + state.skills.join('، ')) : ''
+    ].filter(Boolean).join('\n');
+    try {
+      const raw = await callClaude(
+        'وصف الوظيفة:\n' + jd + '\n\nملخص السيرة الذاتية الحالية:\n' + resumeSummary +
+        '\n\nقيّم مدى توافق هذه السيرة مع هذه الوظيفة. أرجع فقط كائن JSON بالضبط بهذا الشكل: {"score": رقم من 0 إلى 100, "missingKeywords": ["كلمة1","كلمة2"], "advice": "نصيحة واحدة قصيرة لتحسين التوافق"}. لا تخترع مهارات أو خبرات غير موجودة، قيّم فقط بناءً على المكتوب فعلاً. أرجع JSON فقط دون أي نص إضافي أو markdown.',
+        { system: 'أنت خبير في تحليل توافق السير الذاتية مع أنظمة ATS. ترجع فقط JSON صالحاً.', maxTokens: 800 }
+      );
+      const result = parseJSONLoose(raw);
+      const score = Math.max(0, Math.min(100, parseInt(result.score, 10) || 0));
+      document.getElementById('atsResult').style.display = 'block';
+      document.getElementById('atsScoreFill').style.width = score + '%';
+      document.getElementById('atsScoreLabel').textContent = score + '%';
+      document.getElementById('atsAdvice').textContent = result.advice || '';
+      document.getElementById('atsKeywords').innerHTML = (result.missingKeywords || []).map(function(k){ return '<span class="cv-skill">' + escapeHtml(k) + '</span>'; }).join('');
+      setStatus(statusEl, "");
+    } catch(err){ setStatus(statusEl, "تعذّر التحليل الآن.", true); }
+    this.disabled = false;
   });
 
   // ---------- Letter AI ----------
